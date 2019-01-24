@@ -19,7 +19,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	private static final String BRACES_PATTERN = "{%s}";
 	private static final String ROUND_BRACKETS_PATTERN = "(%s)";
 	private static final String SQUARE_BRACKETS_PATTERN = "[%s]";
-	private static final String PAIR_PATTERN = "\"%s\" : %s";
+	private static final String PAIR_PATTERN = "\"%s\":%s";
 	private static final String QUOTED_STRING_PATTERN = "\"%s\"";
 	private static final String TIMESTAMP_PATTERN = "%s %s %s";
 
@@ -534,6 +534,22 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 			buf.deleteCharAt(buf.length() - 1);
 		}
 		setJSON(ctx, buf.toString());
+	}
+
+	@Override
+	public void exitColumn(ProtocolLogParser.ColumnContext ctx) {
+		final StringBuilder buf = new StringBuilder();
+		buf.append(String.format(PAIR_PATTERN, "column", getJSON(ctx.namedUuid())));
+		buf.append(",");
+		buf.append(String.format(PAIR_PATTERN, "value", getJSON(ctx.tableCellValue())));
+		setJSON(ctx, addBraces(buf.toString()));
+	}
+
+	@Override
+	public void exitTableCellValue(ProtocolLogParser.TableCellValueContext ctx) {
+		// Retrieving translation of child rule
+		final ParserRuleContext value = ctx.getRuleContext(ParserRuleContext.class, 0);
+		setJSON(ctx, getJSON(value));
 	}
 
 	// UTILITY METHODS
