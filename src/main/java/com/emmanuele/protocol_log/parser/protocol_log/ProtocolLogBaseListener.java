@@ -892,6 +892,18 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterParametersRequest(ProtocolLogParser.ParametersRequestContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParametersRequest(ProtocolLogParser.ParametersRequestContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRowRequest(ProtocolLogParser.RowRequestContext ctx) { }
 	/**
 	 * {@inheritDoc}

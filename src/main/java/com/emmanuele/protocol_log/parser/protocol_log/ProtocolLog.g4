@@ -109,6 +109,7 @@ objectBody
 			| columnsRequest
 			| rowRequestsList
 			| overrides
+			| parametersRequest
 		) NL
 	)* '}'
 ;
@@ -546,6 +547,11 @@ rowRequestsList
 			| rowRequestWithParams
 		)
 	)*
+;
+
+parametersRequest
+:
+	'Parameters' '=' '[' INTEGER ']' objectBody
 ;
 
 rowRequest
