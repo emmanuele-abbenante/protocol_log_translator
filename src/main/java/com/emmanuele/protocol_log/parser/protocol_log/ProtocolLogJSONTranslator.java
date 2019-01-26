@@ -149,7 +149,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 		for (ProtocolLogParser.PairContext pair : ctx.pair()) {
 			buf.append(getJSON(pair)).append(",");
 		}
-		for (ProtocolLogParser.ColumnsListContext pair : ctx.columnsList()) {
+		for (ProtocolLogParser.ColumnsRequestContext pair : ctx.columnsRequest()) {
 			buf.append(getJSON(pair)).append(",");
 		}
 		for (ProtocolLogParser.RowRequestsListContext pair : ctx.rowRequestsList()) {
@@ -301,7 +301,14 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 
 	@Override
 	public void exitStreamMessageIdentifiersValue(ProtocolLogParser.StreamMessageIdentifiersValueContext ctx) {
-		setJSON(ctx, addQuotes(ctx.STRING().getText()));
+		final StringBuilder buf = new StringBuilder();
+		for (final TerminalNode str : ctx.STRING()) {
+			buf.append(addQuotes(str.getText())).append(",");
+		}
+		if (buf.length() > 0) {
+			buf.deleteCharAt(buf.length() - 1);
+		}
+		setJSON(ctx, addSquareBrackets(buf.toString()));
 	}
 
 	@Override
@@ -311,7 +318,11 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 
 	@Override
 	public void exitDoubleValue(ProtocolLogParser.DoubleValueContext ctx) {
-		setJSON(ctx, ctx.DOUBLE().getText());
+		String value = null;
+		if (ctx.DOUBLE() != null) {
+			value = ctx.DOUBLE().getText();
+		}
+		setJSON(ctx, value);
 	}
 
 	@Override
@@ -445,17 +456,33 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
-	public void exitColumnsList(ProtocolLogParser.ColumnsListContext ctx) {
+	public void exitColumnsRequest(ProtocolLogParser.ColumnsRequestContext ctx) {
 		final StringBuilder buf = new StringBuilder();
-		for (int i = 0; i < ctx.namedUuid().size(); i++) {
-			if (i % 2 == 0) {
-				buf.append(getJSON(ctx.namedUuid(i))).append(",");
+		for (final ParseTree child : ctx.children) {
+			if (child instanceof ParserRuleContext) {
+				buf.append(getJSON(child)).append(",");
 			}
 		}
 		if (buf.length() > 0) {
 			buf.deleteCharAt(buf.length() - 1);
 		}
 		setJSON(ctx, String.format(PAIR_PATTERN, "Columns", addSquareBrackets(buf.toString())));
+	}
+
+	@Override
+	public void exitColumnRequest(ProtocolLogParser.ColumnRequestContext ctx) {
+		setJSON(ctx, getJSON(ctx.namedUuid(1)));
+	}
+
+	@Override
+	public void exitColumnRequestWithParams(ProtocolLogParser.ColumnRequestWithParamsContext ctx) {
+		final StringBuilder buf = new StringBuilder();
+		buf.append(String.format(PAIR_PATTERN, "columnRequestId", addQuotes(ctx.UUID().getText()))).append(",");
+		final String column = getJSON(ctx.pair().value());
+		buf.append(String.format(PAIR_PATTERN, "column", column)).append(",");
+		final String parameters = getJSON(ctx.messageBody());
+		buf.append(String.format(PAIR_PATTERN, "parameters", addBraces(parameters)));
+		setJSON(ctx, addBraces(buf.toString()));
 	}
 
 	@Override

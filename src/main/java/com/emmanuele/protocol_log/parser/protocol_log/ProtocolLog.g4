@@ -100,18 +100,22 @@ messageHeader
 	)? ',' '<size>' '[' INTEGER ']' NL
 ;
 
+//TODO rename in objectBody
+
 messageBody
 :
 	'{' NL
 	(
 		(
 			pair
-			| columnsList
+			| columnsRequest
 			| rowRequestsList
 			| overrides
 		) NL
 	)* '}'
 ;
+
+//TODO use namedUuid as field key
 
 pair
 :
@@ -167,6 +171,8 @@ value
 	| tableValue
 	| message
 	| anyValue
+	| namedUuid
+	| parametersValue
 	| STRING
 	| EMPTY_VALUE
 ;
@@ -215,7 +221,15 @@ uintegerValue
 
 doubleValue
 :
-	'<double>' DOUBLE
+	(
+		'<double>'
+		| '<doublevalue>'
+	)
+	(
+		DOUBLE
+		| INTEGER
+		| EMPTY_VALUE
+	)
 ;
 
 datetimeValue
@@ -249,7 +263,10 @@ subscriptionTypeValue
 
 streamMessageIdentifiersValue
 :
-	'{\'' STRING '\'}'
+	'{' '\'' STRING '\''
+	(
+		',' '\'' STRING '\''
+	)* '}'
 ;
 
 filterValue
@@ -339,6 +356,20 @@ requestTypeValue
 strategyStateValue
 :
 	'<strategy state>' STRING
+;
+
+parametersValue
+:
+	'<parameters>'
+	(
+		(
+			'[' INTEGER ']' '{' NL
+			(
+				UUID '=' value NL
+			)+ '}'
+		)
+		| EMPTY_VALUE
+	)
 ;
 
 vectorValue
@@ -447,12 +478,27 @@ errorDoubleValue
 	'<error double>' QUOTED_STRING
 ;
 
-columnsList
+columnsRequest
 :
 	'Columns' '[' INTEGER ']' '='
 	(
-		NL '[' namedUuid ']' ':' 'UPDATE' ':' '{' namedUuid NL? '}'
+		NL
+		(
+			columnRequest
+			| columnRequestWithParams
+		)
 	)*
+;
+
+columnRequest
+:
+	'[' namedUuid ']' ':' 'UPDATE' ':' '{' namedUuid NL? '}'
+;
+
+columnRequestWithParams
+:
+	'[' UUID ']' ':' 'UPDATE' ':' '{' NL? pair NL? 'parameters' '=' '[' INTEGER ']'
+	messageBody NL? '}'
 ;
 
 rowRequestsList
@@ -508,6 +554,10 @@ DASHED_STRING
 EMPTY_VALUE
 :
 	'<empty>'
+	| '<empty integer>'
+	| '<empty string>'
+	| '<empty uuid>'
+	| '<no value>'
 ;
 
 UUID
