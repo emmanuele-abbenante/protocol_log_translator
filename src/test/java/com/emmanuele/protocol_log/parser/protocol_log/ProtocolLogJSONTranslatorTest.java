@@ -73,9 +73,16 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
-	public void testDoubleValue() {
+	public void testDoubleValueDouble() {
 		final String source = "<double> 0.87687867";
 		final String expected = "0.87687867";
+		testTraslateRule(source, expected, parser -> parser.doubleValue());
+	}
+
+	@Test
+	public void testDoubleValueInteger() {
+		final String source = "<double> 34";
+		final String expected = "34";
 		testTraslateRule(source, expected, parser -> parser.doubleValue());
 	}
 

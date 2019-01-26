@@ -298,6 +298,9 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 		if (ctx.DOUBLE() != null) {
 			value = ctx.DOUBLE().getText();
 		}
+		if (ctx.INTEGER() != null) {
+			value = ctx.INTEGER().getText();
+		}
 		setJSON(ctx, value);
 	}
 
