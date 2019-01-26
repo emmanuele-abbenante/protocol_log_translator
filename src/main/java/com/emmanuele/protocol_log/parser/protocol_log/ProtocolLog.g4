@@ -536,7 +536,7 @@ columnRequest
 
 columnRequestWithParams
 :
-	'[' UUID ']' ':' 'UPDATE' ':' '{' NL? pair NL? 'parameters' '=' '[' INTEGER ']'
+	'[' UUID ']' ':' 'UPDATE' ':' '{' NL? pair NL? STRING '=' '[' INTEGER ']'
 	messageBody NL? '}'
 ;
 
@@ -544,13 +544,23 @@ rowRequestsList
 :
 	'Rows' '[' INTEGER ']' '='
 	(
-		NL rowRequest
+		NL
+		(
+			rowRequest
+			| rowRequestWithParams
+		)
 	)*
 ;
 
 rowRequest
 :
 	'[' rowId ']' ':' 'UPDATE' ':' rowRequestKey
+;
+
+rowRequestWithParams
+:
+	'[' rowId ']' ':' 'UPDATE' ':' '{' NL? rowRequestKey NL? STRING '=' '['
+	INTEGER ']' messageBody NL? '}'
 ;
 
 rowRequestKey

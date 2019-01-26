@@ -408,16 +408,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitCondition(ProtocolLogParser.ConditionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#enumValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterEnumValue(ProtocolLogParser.EnumValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#enumValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitEnumValue(ProtocolLogParser.EnumValueContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#stringValue}.
 	 * @param ctx the parse tree
 	 */
@@ -757,6 +747,16 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRowRequest(ProtocolLogParser.RowRequestContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#rowRequestWithParams}.
+	 * @param ctx the parse tree
+	 */
+	void enterRowRequestWithParams(ProtocolLogParser.RowRequestWithParamsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#rowRequestWithParams}.
+	 * @param ctx the parse tree
+	 */
+	void exitRowRequestWithParams(ProtocolLogParser.RowRequestWithParamsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#rowRequestKey}.
 	 * @param ctx the parse tree

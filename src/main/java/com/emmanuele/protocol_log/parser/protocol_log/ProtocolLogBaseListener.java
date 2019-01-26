@@ -496,18 +496,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEnumValue(ProtocolLogParser.EnumValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEnumValue(ProtocolLogParser.EnumValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterStringValue(ProtocolLogParser.StringValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -911,6 +899,18 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRowRequest(ProtocolLogParser.RowRequestContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRowRequestWithParams(ProtocolLogParser.RowRequestWithParamsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRowRequestWithParams(ProtocolLogParser.RowRequestWithParamsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
