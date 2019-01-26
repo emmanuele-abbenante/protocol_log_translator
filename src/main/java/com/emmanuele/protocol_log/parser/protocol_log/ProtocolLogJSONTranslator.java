@@ -7,8 +7,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import com.emmanuele.protocol_log.parser.protocol_log.ProtocolLogParser.NamedUuidContext;
-
 public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implements ProtocolLogListener {
 
 	private static final String NULL_VALUE = "null";
@@ -241,8 +239,6 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 			}
 		}
 		setJSON(ctx, value);
-		// TODO check if needed
-		setJSON(ctx.getParent(), value);
 	}
 
 	@Override
@@ -334,22 +330,8 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	@Override
 	public void exitUuidVector(ProtocolLogParser.UuidVectorContext ctx) {
 		final StringBuilder buf = new StringBuilder();
-		final List<NamedUuidContext> namedUuids = ctx.namedUuid();
-		final List<TerminalNode> uuids = ctx.UUID();
-		if (!namedUuids.isEmpty()) {
-			for (final ParserRuleContext child : namedUuids) {
-				final String value = getJSON(child);
-				if (value != null) {
-					buf.append(value).append(",");
-				}
-			}
-		} else if (!uuids.isEmpty()) {
-			for (final ParseTree child : uuids) {
-				final String value = child.getText();
-				if (value != null) {
-					buf.append(addQuotes(value)).append(",");
-				}
-			}
+		for (ProtocolLogParser.UuidValueContext child : ctx.uuidValue()) {
+			buf.append(getJSON(child)).append(",");
 		}
 		if (buf.length() > 0) {
 			buf.deleteCharAt(buf.length() - 1);
@@ -509,7 +491,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	@Override
 	public void exitColumn(ProtocolLogParser.ColumnContext ctx) {
 		final StringBuilder buf = new StringBuilder();
-		buf.append(String.format(PAIR_PATTERN, "column", getJSON(ctx.namedUuid())));
+		buf.append(String.format(PAIR_PATTERN, "column", getJSON(ctx.uuidValue())));
 		buf.append(",");
 		buf.append(String.format(PAIR_PATTERN, "value", getJSON(ctx.tableCellValue())));
 		setJSON(ctx, addBraces(buf.toString()));

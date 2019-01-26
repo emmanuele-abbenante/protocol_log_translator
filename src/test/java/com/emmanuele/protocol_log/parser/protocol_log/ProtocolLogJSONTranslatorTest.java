@@ -38,6 +38,71 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testValueStatus() {
+		final String source = "<status> Ok";
+		final String expected = "\"Ok\"";
+		testTraslateRule(source, expected, parser -> parser.value());
+	}
+
+	@Test
+	public void testValueInteger() {
+		final String source = "<integer> 3";
+		final String expected = "3";
+		testTraslateRule(source, expected, parser -> parser.value());
+	}
+
+	@Test
+	public void testValueUuid() {
+		final String source = "<uuid> 54b148ce-2091-11e9-bd60-e7ffa3dffd67";
+		final String expected = "\"54b148ce-2091-11e9-bd60-e7ffa3dffd67\"";
+		testTraslateRule(source, expected, parser -> parser.value());
+	}
+
+	@Test
+	public void testUuidValueTypedUuid() {
+		final String source = "<uuid> 54b148ce-2091-11e9-bd60-e7ffa3dffd67";
+		final String expected = "\"54b148ce-2091-11e9-bd60-e7ffa3dffd67\"";
+		testTraslateRule(source, expected, parser -> parser.uuidValue());
+	}
+
+	@Test
+	public void testUuidValueUuid() {
+		final String source = "54b148ce-2091-11e9-bd60-e7ffa3dffd67";
+		final String expected = "\"54b148ce-2091-11e9-bd60-e7ffa3dffd67\"";
+		testTraslateRule(source, expected, parser -> parser.uuidValue());
+	}
+
+	@Test
+	public void testUuidValueTypedNamedUuid() {
+		final String source = "<uuid> Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)";
+		final String expected = "\"Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\"";
+		testTraslateRule(source, expected, parser -> parser.uuidValue());
+	}
+
+	@Test
+	public void testUuidValueNamedUuid() {
+		final String source = "Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)";
+		final String expected = "\"Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\"";
+		testTraslateRule(source, expected, parser -> parser.uuidValue());
+	}
+
+	@Test
+	public void testUuidValueEmpty() {
+		final String source = "<uuid> <empty>";
+		final String expected = "null";
+		testTraslateRule(source, expected, parser -> parser.uuidValue());
+	}
+
+	@Test
+	public void testUuidVector() {
+		final String source = "<vector of uuid> [3]\n" + "    0 = Dividends (8716833d-2951-4815-88bb-3c87e3637eb8)\n"
+				+ "    1 = Dividend time fallback (0ec616b3-b779-11e4-bb45-245e0d1c06b7)\n"
+				+ "    2 = Dividend tax rule (39c3f1b1-900e-11e8-9e47-f1bbe9ebb3a6)";
+		final String expected = "[\"Dividends (8716833d-2951-4815-88bb-3c87e3637eb8)\",\"Dividend time fallback (0ec616b3-b779-11e4-bb45-245e0d1c06b7)\",\"Dividend tax rule (39c3f1b1-900e-11e8-9e47-f1bbe9ebb3a6)\"]";
+		testTraslateRule(source, expected, parser -> parser.uuidVector());
+	}
+
+	@Test
 	public void testTableCellValue() {
 		final String source = "<double> 0.87687867";
 		final String expected = "0.87687867";

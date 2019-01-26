@@ -161,7 +161,6 @@ value
 	| tableValue
 	| message
 	| anyValue
-	| namedUuid
 	| parametersValue
 	| viidValue
 	| STRING
@@ -170,7 +169,7 @@ value
 
 uuidValue
 :
-	'<uuid>'
+	'<uuid>'?
 	(
 		UUID
 		| namedUuid
@@ -329,8 +328,7 @@ uuidVector
 		(
 			NL INTEGER '='
 			(
-				UUID
-				| namedUuid
+				uuidValue
 			)
 		)+
 		| EMPTY_VALUE
@@ -403,8 +401,7 @@ column
 :
 	'['
 	(
-		namedUuid
-		| UUID
+		uuidValue
 	) ']' '='
 	(
 		tableCellValue
