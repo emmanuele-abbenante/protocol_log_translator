@@ -241,6 +241,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 			}
 		}
 		setJSON(ctx, value);
+		//TODO check if needed
 		setJSON(ctx.getParent(), value);
 	}
 

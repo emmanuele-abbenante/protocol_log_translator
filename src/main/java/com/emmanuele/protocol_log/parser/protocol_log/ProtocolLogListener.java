@@ -268,16 +268,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitIntegerValue(ProtocolLogParser.IntegerValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#uintegerValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterUintegerValue(ProtocolLogParser.UintegerValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#uintegerValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitUintegerValue(ProtocolLogParser.UintegerValueContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#doubleValue}.
 	 * @param ctx the parse tree
 	 */
@@ -347,36 +337,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStringValue(ProtocolLogParser.StringValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#uint64Value}.
-	 * @param ctx the parse tree
-	 */
-	void enterUint64Value(ProtocolLogParser.Uint64ValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#uint64Value}.
-	 * @param ctx the parse tree
-	 */
-	void exitUint64Value(ProtocolLogParser.Uint64ValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#uint32Value}.
-	 * @param ctx the parse tree
-	 */
-	void enterUint32Value(ProtocolLogParser.Uint32ValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#uint32Value}.
-	 * @param ctx the parse tree
-	 */
-	void exitUint32Value(ProtocolLogParser.Uint32ValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#int32Value}.
-	 * @param ctx the parse tree
-	 */
-	void enterInt32Value(ProtocolLogParser.Int32ValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#int32Value}.
-	 * @param ctx the parse tree
-	 */
-	void exitInt32Value(ProtocolLogParser.Int32ValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#anyValue}.
 	 * @param ctx the parse tree

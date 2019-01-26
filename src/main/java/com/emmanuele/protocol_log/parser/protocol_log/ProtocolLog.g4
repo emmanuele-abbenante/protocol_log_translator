@@ -151,10 +151,6 @@ value
 	| stringValue
 	| integerTypedValue
 	| integerValue
-	| uintegerValue
-	| int32Value
-	| uint32Value
-	| uint64Value
 	| doubleValue
 	| datetimeValue
 	| timestampValue
@@ -223,17 +219,18 @@ booleanValue
 
 integerTypedValue
 :
-	'<integer>' INTEGER
+	(
+		'<integer>'
+		| '<uinteger>'
+		| '<uint64>'
+		| '<uint32>'
+		| '<int32>'
+	) INTEGER
 ;
 
 integerValue
 :
 	INTEGER
-;
-
-uintegerValue
-:
-	'<uinteger>' INTEGER
 ;
 
 doubleValue
@@ -294,21 +291,6 @@ condition
 stringValue
 :
 	'<string>' QUOTED_STRING
-;
-
-uint64Value
-:
-	'<uint64>' INTEGER
-;
-
-uint32Value
-:
-	'<uint32>' INTEGER
-;
-
-int32Value
-:
-	'<int32>' INTEGER
 ;
 
 anyValue

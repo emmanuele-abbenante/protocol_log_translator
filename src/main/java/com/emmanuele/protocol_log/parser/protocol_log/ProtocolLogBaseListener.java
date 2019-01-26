@@ -328,18 +328,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUintegerValue(ProtocolLogParser.UintegerValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitUintegerValue(ProtocolLogParser.UintegerValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterDoubleValue(ProtocolLogParser.DoubleValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -419,42 +407,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStringValue(ProtocolLogParser.StringValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterUint64Value(ProtocolLogParser.Uint64ValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitUint64Value(ProtocolLogParser.Uint64ValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterUint32Value(ProtocolLogParser.Uint32ValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitUint32Value(ProtocolLogParser.Uint32ValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInt32Value(ProtocolLogParser.Int32ValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInt32Value(ProtocolLogParser.Int32ValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
