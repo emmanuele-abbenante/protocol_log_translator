@@ -59,17 +59,17 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
-	public void testIntegerTypedValueInteger() {
+	public void testIntegerValueInteger() {
 		final String source = "<integer> 3";
 		final String expected = "3";
-		testTraslateRule(source, expected, parser -> parser.integerTypedValue());
+		testTraslateRule(source, expected, parser -> parser.integerValue());
 	}
 
 	@Test
-	public void testIntegerTypedValueUint32() {
+	public void testIntegerValueUint32() {
 		final String source = "<uint32> 250000";
 		final String expected = "250000";
-		testTraslateRule(source, expected, parser -> parser.integerTypedValue());
+		testTraslateRule(source, expected, parser -> parser.integerValue());
 	}
 
 	@Test

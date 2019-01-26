@@ -266,14 +266,6 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
-	public void exitIntegerTypedValue(ProtocolLogParser.IntegerTypedValueContext ctx) {
-		final ParseTree child = ctx.getChild(1);
-		if (child != null) {
-			setJSON(ctx, child.getText());
-		}
-	}
-
-	@Override
 	public void exitIntegerValue(ProtocolLogParser.IntegerValueContext ctx) {
 		setJSON(ctx, ctx.INTEGER().getText());
 	}

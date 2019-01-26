@@ -248,16 +248,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitBooleanValue(ProtocolLogParser.BooleanValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#integerTypedValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntegerTypedValue(ProtocolLogParser.IntegerTypedValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#integerTypedValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntegerTypedValue(ProtocolLogParser.IntegerTypedValueContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#integerValue}.
 	 * @param ctx the parse tree
 	 */

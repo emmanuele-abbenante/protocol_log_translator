@@ -304,18 +304,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIntegerTypedValue(ProtocolLogParser.IntegerTypedValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIntegerTypedValue(ProtocolLogParser.IntegerTypedValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterIntegerValue(ProtocolLogParser.IntegerValueContext ctx) { }
 	/**
 	 * {@inheritDoc}

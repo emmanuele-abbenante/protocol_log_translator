@@ -149,7 +149,6 @@ value
 	uuidValue
 	| booleanValue
 	| stringValue
-	| integerTypedValue
 	| integerValue
 	| doubleValue
 	| datetimeValue
@@ -213,7 +212,7 @@ booleanValue
 	'<boolean>' STRING
 ;
 
-integerTypedValue
+integerValue
 :
 	(
 		'<integer>'
@@ -221,12 +220,7 @@ integerTypedValue
 		| '<uint64>'
 		| '<uint32>'
 		| '<int32>'
-	) INTEGER
-;
-
-integerValue
-:
-	INTEGER
+	)? INTEGER
 ;
 
 doubleValue
