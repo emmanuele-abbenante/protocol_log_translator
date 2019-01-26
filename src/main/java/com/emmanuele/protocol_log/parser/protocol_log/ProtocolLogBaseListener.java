@@ -280,6 +280,66 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInstrumentMarketDataStatusValue(ProtocolLogParser.InstrumentMarketDataStatusValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInstrumentMarketDataStatusValue(ProtocolLogParser.InstrumentMarketDataStatusValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInstrumentTradingPhaseValue(ProtocolLogParser.InstrumentTradingPhaseValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInstrumentTradingPhaseValue(ProtocolLogParser.InstrumentTradingPhaseValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInstrumentTradingStatusValue(ProtocolLogParser.InstrumentTradingStatusValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInstrumentTradingStatusValue(ProtocolLogParser.InstrumentTradingStatusValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSurplusDirectionValue(ProtocolLogParser.SurplusDirectionValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSurplusDirectionValue(ProtocolLogParser.SurplusDirectionValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTrendValue(ProtocolLogParser.TrendValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTrendValue(ProtocolLogParser.TrendValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStatusValue(ProtocolLogParser.StatusValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -436,6 +496,18 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterEnumValue(ProtocolLogParser.EnumValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEnumValue(ProtocolLogParser.EnumValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStringValue(ProtocolLogParser.StringValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -587,6 +659,30 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStrategyStateValue(ProtocolLogParser.StrategyStateValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParametersValue(ProtocolLogParser.ParametersValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParametersValue(ProtocolLogParser.ParametersValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterViidValue(ProtocolLogParser.ViidValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitViidValue(ProtocolLogParser.ViidValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -760,13 +856,37 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterColumnsList(ProtocolLogParser.ColumnsListContext ctx) { }
+	@Override public void enterColumnsRequest(ProtocolLogParser.ColumnsRequestContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitColumnsList(ProtocolLogParser.ColumnsListContext ctx) { }
+	@Override public void exitColumnsRequest(ProtocolLogParser.ColumnsRequestContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterColumnRequest(ProtocolLogParser.ColumnRequestContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColumnRequest(ProtocolLogParser.ColumnRequestContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterColumnRequestWithParams(ProtocolLogParser.ColumnRequestWithParamsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColumnRequestWithParams(ProtocolLogParser.ColumnRequestWithParamsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -228,6 +228,56 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitNamedUuid(ProtocolLogParser.NamedUuidContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#instrumentMarketDataStatusValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstrumentMarketDataStatusValue(ProtocolLogParser.InstrumentMarketDataStatusValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#instrumentMarketDataStatusValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstrumentMarketDataStatusValue(ProtocolLogParser.InstrumentMarketDataStatusValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#instrumentTradingPhaseValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstrumentTradingPhaseValue(ProtocolLogParser.InstrumentTradingPhaseValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#instrumentTradingPhaseValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstrumentTradingPhaseValue(ProtocolLogParser.InstrumentTradingPhaseValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#instrumentTradingStatusValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstrumentTradingStatusValue(ProtocolLogParser.InstrumentTradingStatusValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#instrumentTradingStatusValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstrumentTradingStatusValue(ProtocolLogParser.InstrumentTradingStatusValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#surplusDirectionValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterSurplusDirectionValue(ProtocolLogParser.SurplusDirectionValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#surplusDirectionValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitSurplusDirectionValue(ProtocolLogParser.SurplusDirectionValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#trendValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrendValue(ProtocolLogParser.TrendValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#trendValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrendValue(ProtocolLogParser.TrendValueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#statusValue}.
 	 * @param ctx the parse tree
 	 */
@@ -358,6 +408,16 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitCondition(ProtocolLogParser.ConditionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#enumValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterEnumValue(ProtocolLogParser.EnumValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#enumValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitEnumValue(ProtocolLogParser.EnumValueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#stringValue}.
 	 * @param ctx the parse tree
 	 */
@@ -487,6 +547,26 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStrategyStateValue(ProtocolLogParser.StrategyStateValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#parametersValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterParametersValue(ProtocolLogParser.ParametersValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#parametersValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitParametersValue(ProtocolLogParser.ParametersValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#viidValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterViidValue(ProtocolLogParser.ViidValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#viidValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitViidValue(ProtocolLogParser.ViidValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#vectorValue}.
 	 * @param ctx the parse tree
@@ -628,15 +708,35 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitErrorDoubleValue(ProtocolLogParser.ErrorDoubleValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#columnsList}.
+	 * Enter a parse tree produced by {@link ProtocolLogParser#columnsRequest}.
 	 * @param ctx the parse tree
 	 */
-	void enterColumnsList(ProtocolLogParser.ColumnsListContext ctx);
+	void enterColumnsRequest(ProtocolLogParser.ColumnsRequestContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#columnsList}.
+	 * Exit a parse tree produced by {@link ProtocolLogParser#columnsRequest}.
 	 * @param ctx the parse tree
 	 */
-	void exitColumnsList(ProtocolLogParser.ColumnsListContext ctx);
+	void exitColumnsRequest(ProtocolLogParser.ColumnsRequestContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#columnRequest}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumnRequest(ProtocolLogParser.ColumnRequestContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#columnRequest}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumnRequest(ProtocolLogParser.ColumnRequestContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#columnRequestWithParams}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumnRequestWithParams(ProtocolLogParser.ColumnRequestWithParamsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#columnRequestWithParams}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumnRequestWithParams(ProtocolLogParser.ColumnRequestWithParamsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#rowRequestsList}.
 	 * @param ctx the parse tree

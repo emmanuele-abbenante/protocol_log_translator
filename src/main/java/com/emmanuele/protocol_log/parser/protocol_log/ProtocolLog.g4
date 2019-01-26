@@ -173,6 +173,12 @@ value
 	| anyValue
 	| namedUuid
 	| parametersValue
+	| viidValue
+	| surplusDirectionValue
+	| trendValue
+	| instrumentMarketDataStatusValue
+	| instrumentTradingPhaseValue
+	| instrumentTradingStatusValue
 	| STRING
 	| EMPTY_VALUE
 ;
@@ -193,6 +199,31 @@ namedUuid
 		DASHED_STRING
 		| STRING
 	)+ '(' UUID ')'
+;
+
+instrumentMarketDataStatusValue
+:
+	'<instrument market data status>' STRING
+;
+
+instrumentTradingPhaseValue
+:
+	'<instrument trading phase>' STRING
+;
+
+instrumentTradingStatusValue
+:
+	'<instrument trading status>' STRING
+;
+
+surplusDirectionValue
+:
+	'<surplus direction>' STRING
+;
+
+trendValue
+:
+	'<trend>' STRING
 ;
 
 statusValue
@@ -370,6 +401,14 @@ parametersValue
 		)
 		| EMPTY_VALUE
 	)
+;
+
+viidValue
+:
+	'<viid>' pair
+	(
+		';' pair
+	)* '{' STRING '}'
 ;
 
 vectorValue
