@@ -210,11 +210,7 @@ enumTypedValue
 
 booleanValue
 :
-	'<boolean>'
-	(
-		'true'
-		| 'false'
-	)
+	'<boolean>' STRING
 ;
 
 integerTypedValue

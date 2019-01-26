@@ -87,6 +87,13 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testBooleanValue() {
+		final String source = "<boolean> false";
+		final String expected = "false";
+		testTraslateRule(source, expected, parser -> parser.booleanValue());
+	}
+
+	@Test
 	public void testColumnsRequest() {
 		final String source = "Columns [2] =\n"
 				+ "     [Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)]: UPDATE: {Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)\n"

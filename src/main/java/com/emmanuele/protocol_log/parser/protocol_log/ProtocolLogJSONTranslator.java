@@ -241,7 +241,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 			}
 		}
 		setJSON(ctx, value);
-		//TODO check if needed
+		// TODO check if needed
 		setJSON(ctx.getParent(), value);
 	}
 
@@ -262,7 +262,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 
 	@Override
 	public void exitBooleanValue(ProtocolLogParser.BooleanValueContext ctx) {
-		setJSON(ctx, ctx.getChild(1).getText());
+		setJSON(ctx, ctx.STRING().getText());
 	}
 
 	@Override
