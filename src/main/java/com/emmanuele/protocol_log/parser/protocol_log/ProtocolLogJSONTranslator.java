@@ -127,7 +127,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 		final StringBuilder buf = new StringBuilder();
 		buf.append(getJSON(ctx.messageHeader()));
 		buf.append(",");
-		buf.append(getJSON(ctx.messageBody()));
+		buf.append(getJSON(ctx.objectBody()));
 		setJSON(ctx, addBraces(buf.toString()));
 	}
 
@@ -144,7 +144,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
-	public void exitMessageBody(ProtocolLogParser.MessageBodyContext ctx) {
+	public void exitObjectBody(ProtocolLogParser.ObjectBodyContext ctx) {
 		final StringBuilder buf = new StringBuilder();
 		for (ProtocolLogParser.PairContext pair : ctx.pair()) {
 			buf.append(getJSON(pair)).append(",");
@@ -174,6 +174,9 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 		String fieldKey = getJSON(ctx.fieldKey());
 		if (fieldKey == null) {
 			fieldKey = getJSON(ctx.identifiedFieldKey());
+		}
+		if (fieldKey == null) {
+			fieldKey = ctx.UUID().getText();
 		}
 		setJSON(ctx, String.format(PAIR_PATTERN, fieldKey, getJSON(ctx.value())));
 	}
@@ -480,7 +483,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 		buf.append(String.format(PAIR_PATTERN, "columnRequestId", addQuotes(ctx.UUID().getText()))).append(",");
 		final String column = getJSON(ctx.pair().value());
 		buf.append(String.format(PAIR_PATTERN, "column", column)).append(",");
-		final String parameters = getJSON(ctx.messageBody());
+		final String parameters = getJSON(ctx.objectBody());
 		buf.append(String.format(PAIR_PATTERN, "parameters", addBraces(parameters)));
 		setJSON(ctx, addBraces(buf.toString()));
 	}

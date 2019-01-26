@@ -89,7 +89,7 @@ remoteComponent
 
 message
 :
-	messageHeader messageBody
+	messageHeader objectBody
 ;
 
 messageHeader
@@ -100,9 +100,7 @@ messageHeader
 	)? ',' '<size>' '[' INTEGER ']' NL
 ;
 
-//TODO rename in objectBody
-
-messageBody
+objectBody
 :
 	'{' NL
 	(
@@ -122,6 +120,7 @@ pair
 	(
 		fieldKey
 		| identifiedFieldKey
+		| UUID
 	) '=' value
 ;
 
@@ -394,10 +393,7 @@ parametersValue
 	'<parameters>'
 	(
 		(
-			'[' INTEGER ']' '{' NL
-			(
-				UUID '=' value NL
-			)+ '}'
+			'[' INTEGER ']' objectBody
 		)
 		| EMPTY_VALUE
 	)
@@ -537,7 +533,7 @@ columnRequest
 columnRequestWithParams
 :
 	'[' UUID ']' ':' 'UPDATE' ':' '{' NL? pair NL? STRING '=' '[' INTEGER ']'
-	messageBody NL? '}'
+	objectBody NL? '}'
 ;
 
 rowRequestsList
@@ -560,7 +556,7 @@ rowRequest
 rowRequestWithParams
 :
 	'[' rowId ']' ':' 'UPDATE' ':' '{' NL? rowRequestKey NL? STRING '=' '['
-	INTEGER ']' messageBody NL? '}'
+	INTEGER ']' objectBody NL? '}'
 ;
 
 rowRequestKey

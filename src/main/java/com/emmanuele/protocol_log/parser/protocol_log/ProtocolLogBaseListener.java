@@ -184,13 +184,13 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMessageBody(ProtocolLogParser.MessageBodyContext ctx) { }
+	@Override public void enterObjectBody(ProtocolLogParser.ObjectBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMessageBody(ProtocolLogParser.MessageBodyContext ctx) { }
+	@Override public void exitObjectBody(ProtocolLogParser.ObjectBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

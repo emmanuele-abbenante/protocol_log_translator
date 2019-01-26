@@ -148,15 +148,15 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitMessageHeader(ProtocolLogParser.MessageHeaderContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#messageBody}.
+	 * Enter a parse tree produced by {@link ProtocolLogParser#objectBody}.
 	 * @param ctx the parse tree
 	 */
-	void enterMessageBody(ProtocolLogParser.MessageBodyContext ctx);
+	void enterObjectBody(ProtocolLogParser.ObjectBodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#messageBody}.
+	 * Exit a parse tree produced by {@link ProtocolLogParser#objectBody}.
 	 * @param ctx the parse tree
 	 */
-	void exitMessageBody(ProtocolLogParser.MessageBodyContext ctx);
+	void exitObjectBody(ProtocolLogParser.ObjectBodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#pair}.
 	 * @param ctx the parse tree
