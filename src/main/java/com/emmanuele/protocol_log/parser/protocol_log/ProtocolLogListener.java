@@ -188,16 +188,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitFieldKey(ProtocolLogParser.FieldKeyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#identifiedFieldKey}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifiedFieldKey(ProtocolLogParser.IdentifiedFieldKeyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#identifiedFieldKey}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifiedFieldKey(ProtocolLogParser.IdentifiedFieldKeyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#value}.
 	 * @param ctx the parse tree
 	 */

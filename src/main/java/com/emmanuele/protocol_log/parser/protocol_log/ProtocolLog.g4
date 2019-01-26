@@ -114,14 +114,11 @@ objectBody
 	)* '}'
 ;
 
-//TODO use namedUuid as field key
-
 pair
 :
 	(
 		fieldKey
-		| identifiedFieldKey
-		| UUID
+		| uuidValue
 	) '=' value
 ;
 
@@ -133,11 +130,6 @@ protocolType
 fieldKey
 :
 	STRING+
-;
-
-identifiedFieldKey
-:
-	STRING+ '(' UUID ')'
 ;
 
 // VALUES

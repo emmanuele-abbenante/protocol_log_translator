@@ -232,18 +232,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIdentifiedFieldKey(ProtocolLogParser.IdentifiedFieldKeyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIdentifiedFieldKey(ProtocolLogParser.IdentifiedFieldKeyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterValue(ProtocolLogParser.ValueContext ctx) { }
 	/**
 	 * {@inheritDoc}

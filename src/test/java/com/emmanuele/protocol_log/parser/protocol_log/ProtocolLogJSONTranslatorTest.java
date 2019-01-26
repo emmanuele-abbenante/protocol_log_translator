@@ -17,6 +17,34 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testSystemName() {
+		final String source = "tb_test";
+		final String expected = "\"system\":\"tb_test\"";
+		testTraslateRule(source, expected, parser -> parser.systemName());
+	}
+
+	@Test
+	public void testDirection() {
+		final String source = "in";
+		final String expected = "\"direction\":\"in\"";
+		testTraslateRule(source, expected, parser -> parser.direction());
+	}
+
+	@Test
+	public void testMessageType() {
+		final String source = "InstrumentStatus";
+		final String expected = "\"messageType\":\"InstrumentStatus\"";
+		testTraslateRule(source, expected, parser -> parser.messageType());
+	}
+
+	@Test
+	public void testProtocolType() {
+		final String source = "MarketDataProtocol";
+		final String expected = "\"protocolType\":\"MarketDataProtocol\"";
+		testTraslateRule(source, expected, parser -> parser.protocolType());
+	}
+
+	@Test
 	public void testComponentNameString() {
 		final String source = "tb_test_ce2";
 		final String expected = "\"component\":\"tb_test_ce2\"";
@@ -28,6 +56,27 @@ public class ProtocolLogJSONTranslatorTest {
 		final String source = "tb_test_ce2-ce";
 		final String expected = "\"component\":\"tb_test_ce2-ce\"";
 		testTraslateRule(source, expected, parser -> parser.componentName());
+	}
+
+	@Test
+	public void testPairKeyAsString() {
+		final String source = "stream item identifier = <uuid> 5cb0999e-2064-11e9-9750-6de498ccf87f";
+		final String expected = "\"stream item identifier\":\"5cb0999e-2064-11e9-9750-6de498ccf87f\"";
+		testTraslateRule(source, expected, parser -> parser.pair());
+	}
+
+	@Test
+	public void testPairKeyAsNamedUuid() {
+		final String source = "Currency (82583bd9-4465-4ac6-83aa-ab76a6b8da9a) = <empty>";
+		final String expected = "\"Currency (82583bd9-4465-4ac6-83aa-ab76a6b8da9a)\":null";
+		testTraslateRule(source, expected, parser -> parser.pair());
+	}
+
+	@Test
+	public void testPairKeyAsUuid() {
+		final String source = "fc44f1dd-aeb7-11e7-993e-529049f1f1bb = <string> \"Manual\"";
+		final String expected = "\"fc44f1dd-aeb7-11e7-993e-529049f1f1bb\":\"Manual\"";
+		testTraslateRule(source, expected, parser -> parser.pair());
 	}
 
 	@Test
