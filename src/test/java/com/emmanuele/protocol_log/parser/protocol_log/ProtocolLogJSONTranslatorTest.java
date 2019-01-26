@@ -113,14 +113,14 @@ public class ProtocolLogJSONTranslatorTest {
 	public void testEnumTypedValueTrend() {
 		final String source = "<trend> Minus";
 		final String expected = "\"Minus\"";
-		testTraslateRule(source, expected, parser -> parser.enumTypedValue());
+		testTraslateRule(source, expected, parser -> parser.enumValue());
 	}
 
 	@Test
 	public void testEnumTypedValueStatus() {
 		final String source = "<status> Ok";
 		final String expected = "\"Ok\"";
-		testTraslateRule(source, expected, parser -> parser.enumTypedValue());
+		testTraslateRule(source, expected, parser -> parser.enumValue());
 	}
 
 	@Test

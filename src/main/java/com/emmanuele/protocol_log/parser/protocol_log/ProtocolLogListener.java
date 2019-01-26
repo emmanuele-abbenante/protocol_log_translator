@@ -228,15 +228,15 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitNamedUuid(ProtocolLogParser.NamedUuidContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#enumTypedValue}.
+	 * Enter a parse tree produced by {@link ProtocolLogParser#enumValue}.
 	 * @param ctx the parse tree
 	 */
-	void enterEnumTypedValue(ProtocolLogParser.EnumTypedValueContext ctx);
+	void enterEnumValue(ProtocolLogParser.EnumValueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#enumTypedValue}.
+	 * Exit a parse tree produced by {@link ProtocolLogParser#enumValue}.
 	 * @param ctx the parse tree
 	 */
-	void exitEnumTypedValue(ProtocolLogParser.EnumTypedValueContext ctx);
+	void exitEnumValue(ProtocolLogParser.EnumValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#booleanValue}.
 	 * @param ctx the parse tree

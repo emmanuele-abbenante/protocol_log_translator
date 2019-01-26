@@ -142,8 +142,6 @@ identifiedFieldKey
 
 // VALUES
 
-//TODO rename typed values in "typedValue"
-
 value
 :
 	uuidValue
@@ -153,7 +151,7 @@ value
 	| doubleValue
 	| datetimeValue
 	| timestampValue
-	| enumTypedValue
+	| enumValue
 	| filterValue
 	| streamMessageIdentifiersValue
 	| requestTypeValue
@@ -185,7 +183,7 @@ namedUuid
 	)+ '(' UUID ')'
 ;
 
-enumTypedValue
+enumValue
 :
 	(
 		'<strategy state>'

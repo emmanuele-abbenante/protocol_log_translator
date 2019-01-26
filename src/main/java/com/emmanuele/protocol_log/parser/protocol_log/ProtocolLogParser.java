@@ -36,10 +36,10 @@ public class ProtocolLogParser extends Parser {
 		RULE_path = 9, RULE_messageType = 10, RULE_remoteComponent = 11, RULE_message = 12, 
 		RULE_messageHeader = 13, RULE_objectBody = 14, RULE_pair = 15, RULE_protocolType = 16, 
 		RULE_fieldKey = 17, RULE_identifiedFieldKey = 18, RULE_value = 19, RULE_uuidValue = 20, 
-		RULE_namedUuid = 21, RULE_enumTypedValue = 22, RULE_booleanValue = 23, 
-		RULE_integerValue = 24, RULE_doubleValue = 25, RULE_datetimeValue = 26, 
-		RULE_timestampValue = 27, RULE_streamMessageIdentifiersValue = 28, RULE_filterValue = 29, 
-		RULE_condition = 30, RULE_stringValue = 31, RULE_anyValue = 32, RULE_requestTypeValue = 33, 
+		RULE_namedUuid = 21, RULE_enumValue = 22, RULE_booleanValue = 23, RULE_integerValue = 24, 
+		RULE_doubleValue = 25, RULE_datetimeValue = 26, RULE_timestampValue = 27, 
+		RULE_streamMessageIdentifiersValue = 28, RULE_filterValue = 29, RULE_condition = 30, 
+		RULE_stringValue = 31, RULE_anyValue = 32, RULE_requestTypeValue = 33, 
 		RULE_parametersValue = 34, RULE_viidValue = 35, RULE_vectorValue = 36, 
 		RULE_uuidVector = 37, RULE_booleanVector = 38, RULE_integerVectorPair = 39, 
 		RULE_anyVector = 40, RULE_uint32Vector = 41, RULE_messageVector = 42, 
@@ -54,7 +54,7 @@ public class ProtocolLogParser extends Parser {
 			"file", "logEntry", "header", "host", "localComponent", "component", 
 			"componentName", "systemName", "direction", "path", "messageType", "remoteComponent", 
 			"message", "messageHeader", "objectBody", "pair", "protocolType", "fieldKey", 
-			"identifiedFieldKey", "value", "uuidValue", "namedUuid", "enumTypedValue", 
+			"identifiedFieldKey", "value", "uuidValue", "namedUuid", "enumValue", 
 			"booleanValue", "integerValue", "doubleValue", "datetimeValue", "timestampValue", 
 			"streamMessageIdentifiersValue", "filterValue", "condition", "stringValue", 
 			"anyValue", "requestTypeValue", "parametersValue", "viidValue", "vectorValue", 
@@ -1355,8 +1355,8 @@ public class ProtocolLogParser extends Parser {
 		public TimestampValueContext timestampValue() {
 			return getRuleContext(TimestampValueContext.class,0);
 		}
-		public EnumTypedValueContext enumTypedValue() {
-			return getRuleContext(EnumTypedValueContext.class,0);
+		public EnumValueContext enumValue() {
+			return getRuleContext(EnumValueContext.class,0);
 		}
 		public FilterValueContext filterValue() {
 			return getRuleContext(FilterValueContext.class,0);
@@ -1461,7 +1461,7 @@ public class ProtocolLogParser extends Parser {
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(284);
-				enumTypedValue();
+				enumValue();
 				}
 				break;
 			case 9:
@@ -1701,25 +1701,25 @@ public class ProtocolLogParser extends Parser {
 		return _localctx;
 	}
 
-	public static class EnumTypedValueContext extends ParserRuleContext {
+	public static class EnumValueContext extends ParserRuleContext {
 		public TerminalNode STRING() { return getToken(ProtocolLogParser.STRING, 0); }
-		public EnumTypedValueContext(ParserRuleContext parent, int invokingState) {
+		public EnumValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_enumTypedValue; }
+		@Override public int getRuleIndex() { return RULE_enumValue; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ProtocolLogListener ) ((ProtocolLogListener)listener).enterEnumTypedValue(this);
+			if ( listener instanceof ProtocolLogListener ) ((ProtocolLogListener)listener).enterEnumValue(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ProtocolLogListener ) ((ProtocolLogListener)listener).exitEnumTypedValue(this);
+			if ( listener instanceof ProtocolLogListener ) ((ProtocolLogListener)listener).exitEnumValue(this);
 		}
 	}
 
-	public final EnumTypedValueContext enumTypedValue() throws RecognitionException {
-		EnumTypedValueContext _localctx = new EnumTypedValueContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_enumTypedValue);
+	public final EnumValueContext enumValue() throws RecognitionException {
+		EnumValueContext _localctx = new EnumValueContext(_ctx, getState());
+		enterRule(_localctx, 44, RULE_enumValue);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);

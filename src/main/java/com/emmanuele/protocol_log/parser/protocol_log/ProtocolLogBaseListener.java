@@ -280,13 +280,13 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEnumTypedValue(ProtocolLogParser.EnumTypedValueContext ctx) { }
+	@Override public void enterEnumValue(ProtocolLogParser.EnumValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEnumTypedValue(ProtocolLogParser.EnumTypedValueContext ctx) { }
+	@Override public void exitEnumValue(ProtocolLogParser.EnumValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

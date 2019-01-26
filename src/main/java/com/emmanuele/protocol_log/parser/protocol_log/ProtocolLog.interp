@@ -207,7 +207,7 @@ identifiedFieldKey
 value
 uuidValue
 namedUuid
-enumTypedValue
+enumValue
 booleanValue
 integerValue
 doubleValue

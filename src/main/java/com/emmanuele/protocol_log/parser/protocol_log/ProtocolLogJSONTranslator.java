@@ -252,7 +252,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
-	public void exitEnumTypedValue(ProtocolLogParser.EnumTypedValueContext ctx) {
+	public void exitEnumValue(ProtocolLogParser.EnumValueContext ctx) {
 		setJSON(ctx, addQuotes(ctx.STRING().getText()));
 	}
 
