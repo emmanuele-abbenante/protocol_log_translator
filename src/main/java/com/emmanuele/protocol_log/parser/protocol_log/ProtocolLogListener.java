@@ -228,65 +228,15 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitNamedUuid(ProtocolLogParser.NamedUuidContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#instrumentMarketDataStatusValue}.
+	 * Enter a parse tree produced by {@link ProtocolLogParser#enumTypedValue}.
 	 * @param ctx the parse tree
 	 */
-	void enterInstrumentMarketDataStatusValue(ProtocolLogParser.InstrumentMarketDataStatusValueContext ctx);
+	void enterEnumTypedValue(ProtocolLogParser.EnumTypedValueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#instrumentMarketDataStatusValue}.
+	 * Exit a parse tree produced by {@link ProtocolLogParser#enumTypedValue}.
 	 * @param ctx the parse tree
 	 */
-	void exitInstrumentMarketDataStatusValue(ProtocolLogParser.InstrumentMarketDataStatusValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#instrumentTradingPhaseValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterInstrumentTradingPhaseValue(ProtocolLogParser.InstrumentTradingPhaseValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#instrumentTradingPhaseValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitInstrumentTradingPhaseValue(ProtocolLogParser.InstrumentTradingPhaseValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#instrumentTradingStatusValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterInstrumentTradingStatusValue(ProtocolLogParser.InstrumentTradingStatusValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#instrumentTradingStatusValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitInstrumentTradingStatusValue(ProtocolLogParser.InstrumentTradingStatusValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#surplusDirectionValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterSurplusDirectionValue(ProtocolLogParser.SurplusDirectionValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#surplusDirectionValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitSurplusDirectionValue(ProtocolLogParser.SurplusDirectionValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#trendValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterTrendValue(ProtocolLogParser.TrendValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#trendValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitTrendValue(ProtocolLogParser.TrendValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#statusValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterStatusValue(ProtocolLogParser.StatusValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#statusValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitStatusValue(ProtocolLogParser.StatusValueContext ctx);
+	void exitEnumTypedValue(ProtocolLogParser.EnumTypedValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#booleanValue}.
 	 * @param ctx the parse tree
@@ -357,16 +307,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTimestampValue(ProtocolLogParser.TimestampValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#subscriptionTypeValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterSubscriptionTypeValue(ProtocolLogParser.SubscriptionTypeValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#subscriptionTypeValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitSubscriptionTypeValue(ProtocolLogParser.SubscriptionTypeValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#streamMessageIdentifiersValue}.
 	 * @param ctx the parse tree
@@ -448,66 +388,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitAnyValue(ProtocolLogParser.AnyValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#gridViewRowScopeValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterGridViewRowScopeValue(ProtocolLogParser.GridViewRowScopeValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#gridViewRowScopeValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitGridViewRowScopeValue(ProtocolLogParser.GridViewRowScopeValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#gridViewModeValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterGridViewModeValue(ProtocolLogParser.GridViewModeValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#gridViewModeValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitGridViewModeValue(ProtocolLogParser.GridViewModeValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#gridRowDataTypeValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterGridRowDataTypeValue(ProtocolLogParser.GridRowDataTypeValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#gridRowDataTypeValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitGridRowDataTypeValue(ProtocolLogParser.GridRowDataTypeValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#gridViewFilterConditionTypeValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterGridViewFilterConditionTypeValue(ProtocolLogParser.GridViewFilterConditionTypeValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#gridViewFilterConditionTypeValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitGridViewFilterConditionTypeValue(ProtocolLogParser.GridViewFilterConditionTypeValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#gridViewFilterLogicalOperationValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterGridViewFilterLogicalOperationValue(ProtocolLogParser.GridViewFilterLogicalOperationValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#gridViewFilterLogicalOperationValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitGridViewFilterLogicalOperationValue(ProtocolLogParser.GridViewFilterLogicalOperationValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#gridViewSelectionUsageValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterGridViewSelectionUsageValue(ProtocolLogParser.GridViewSelectionUsageValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#gridViewSelectionUsageValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitGridViewSelectionUsageValue(ProtocolLogParser.GridViewSelectionUsageValueContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#requestTypeValue}.
 	 * @param ctx the parse tree
 	 */
@@ -517,16 +397,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRequestTypeValue(ProtocolLogParser.RequestTypeValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#strategyStateValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterStrategyStateValue(ProtocolLogParser.StrategyStateValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#strategyStateValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitStrategyStateValue(ProtocolLogParser.StrategyStateValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#parametersValue}.
 	 * @param ctx the parse tree

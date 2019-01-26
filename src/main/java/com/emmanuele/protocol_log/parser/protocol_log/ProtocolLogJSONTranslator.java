@@ -255,7 +255,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
-	public void exitStatusValue(ProtocolLogParser.StatusValueContext ctx) {
+	public void exitEnumTypedValue(ProtocolLogParser.EnumTypedValueContext ctx) {
 		setJSON(ctx, addQuotes(ctx.STRING().getText()));
 	}
 
@@ -265,7 +265,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
-	public void exitIntegerValue(ProtocolLogParser.IntegerValueContext ctx) {
+	public void exitIntegerTypedValue(ProtocolLogParser.IntegerTypedValueContext ctx) {
 		final ParseTree child = ctx.getChild(1);
 		if (child != null) {
 			setJSON(ctx, child.getText());
@@ -273,33 +273,13 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
-	public void exitUintegerValue(ProtocolLogParser.UintegerValueContext ctx) {
-		setJSON(ctx, ctx.getChild(1).getText());
-	}
-
-	@Override
-	public void exitUint64Value(ProtocolLogParser.Uint64ValueContext ctx) {
-		setJSON(ctx, ctx.getChild(1).getText());
-	}
-
-	@Override
-	public void exitUint32Value(ProtocolLogParser.Uint32ValueContext ctx) {
-		setJSON(ctx, ctx.getChild(1).getText());
-	}
-
-	@Override
-	public void exitInt32Value(ProtocolLogParser.Int32ValueContext ctx) {
-		setJSON(ctx, ctx.getChild(1).getText());
+	public void exitIntegerValue(ProtocolLogParser.IntegerValueContext ctx) {
+		setJSON(ctx, ctx.INTEGER().getText());
 	}
 
 	@Override
 	public void exitDatetimeValue(ProtocolLogParser.DatetimeValueContext ctx) {
 		setJSON(ctx, getJSON(ctx.timestampValue()));
-	}
-
-	@Override
-	public void exitSubscriptionTypeValue(ProtocolLogParser.SubscriptionTypeValueContext ctx) {
-		setJSON(ctx, addQuotes(ctx.getChild(1).getText()));
 	}
 
 	@Override
@@ -344,44 +324,8 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
-	public void exitStrategyStateValue(ProtocolLogParser.StrategyStateValueContext ctx) {
-		setJSON(ctx, addQuotes(ctx.STRING().getText()));
-	}
-
-	@Override
 	public void exitErrorDoubleValue(ProtocolLogParser.ErrorDoubleValueContext ctx) {
 		setJSON(ctx, ctx.QUOTED_STRING().getText());
-	}
-
-	@Override
-	public void exitGridViewRowScopeValue(ProtocolLogParser.GridViewRowScopeValueContext ctx) {
-		setJSON(ctx, addQuotes(ctx.STRING().getText()));
-	}
-
-	@Override
-	public void exitGridViewModeValue(ProtocolLogParser.GridViewModeValueContext ctx) {
-		setJSON(ctx, addQuotes(ctx.STRING().getText()));
-	}
-
-	@Override
-	public void exitGridRowDataTypeValue(ProtocolLogParser.GridRowDataTypeValueContext ctx) {
-		setJSON(ctx, addQuotes(ctx.STRING().getText()));
-	}
-
-	@Override
-	public void exitGridViewFilterConditionTypeValue(ProtocolLogParser.GridViewFilterConditionTypeValueContext ctx) {
-		setJSON(ctx, addQuotes(ctx.STRING().getText()));
-	}
-
-	@Override
-	public void exitGridViewFilterLogicalOperationValue(
-			ProtocolLogParser.GridViewFilterLogicalOperationValueContext ctx) {
-		setJSON(ctx, addQuotes(ctx.STRING().getText()));
-	}
-
-	@Override
-	public void exitGridViewSelectionUsageValue(ProtocolLogParser.GridViewSelectionUsageValueContext ctx) {
-		setJSON(ctx, addQuotes(ctx.STRING().getText()));
 	}
 
 	@Override

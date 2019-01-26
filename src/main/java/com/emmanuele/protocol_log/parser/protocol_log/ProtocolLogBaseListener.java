@@ -280,73 +280,13 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInstrumentMarketDataStatusValue(ProtocolLogParser.InstrumentMarketDataStatusValueContext ctx) { }
+	@Override public void enterEnumTypedValue(ProtocolLogParser.EnumTypedValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInstrumentMarketDataStatusValue(ProtocolLogParser.InstrumentMarketDataStatusValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInstrumentTradingPhaseValue(ProtocolLogParser.InstrumentTradingPhaseValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInstrumentTradingPhaseValue(ProtocolLogParser.InstrumentTradingPhaseValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInstrumentTradingStatusValue(ProtocolLogParser.InstrumentTradingStatusValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInstrumentTradingStatusValue(ProtocolLogParser.InstrumentTradingStatusValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSurplusDirectionValue(ProtocolLogParser.SurplusDirectionValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSurplusDirectionValue(ProtocolLogParser.SurplusDirectionValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTrendValue(ProtocolLogParser.TrendValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTrendValue(ProtocolLogParser.TrendValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterStatusValue(ProtocolLogParser.StatusValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStatusValue(ProtocolLogParser.StatusValueContext ctx) { }
+	@Override public void exitEnumTypedValue(ProtocolLogParser.EnumTypedValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -431,18 +371,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTimestampValue(ProtocolLogParser.TimestampValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSubscriptionTypeValue(ProtocolLogParser.SubscriptionTypeValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSubscriptionTypeValue(ProtocolLogParser.SubscriptionTypeValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -544,78 +472,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGridViewRowScopeValue(ProtocolLogParser.GridViewRowScopeValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitGridViewRowScopeValue(ProtocolLogParser.GridViewRowScopeValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterGridViewModeValue(ProtocolLogParser.GridViewModeValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitGridViewModeValue(ProtocolLogParser.GridViewModeValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterGridRowDataTypeValue(ProtocolLogParser.GridRowDataTypeValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitGridRowDataTypeValue(ProtocolLogParser.GridRowDataTypeValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterGridViewFilterConditionTypeValue(ProtocolLogParser.GridViewFilterConditionTypeValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitGridViewFilterConditionTypeValue(ProtocolLogParser.GridViewFilterConditionTypeValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterGridViewFilterLogicalOperationValue(ProtocolLogParser.GridViewFilterLogicalOperationValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitGridViewFilterLogicalOperationValue(ProtocolLogParser.GridViewFilterLogicalOperationValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterGridViewSelectionUsageValue(ProtocolLogParser.GridViewSelectionUsageValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitGridViewSelectionUsageValue(ProtocolLogParser.GridViewSelectionUsageValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterRequestTypeValue(ProtocolLogParser.RequestTypeValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -623,18 +479,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRequestTypeValue(ProtocolLogParser.RequestTypeValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterStrategyStateValue(ProtocolLogParser.StrategyStateValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStrategyStateValue(ProtocolLogParser.StrategyStateValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

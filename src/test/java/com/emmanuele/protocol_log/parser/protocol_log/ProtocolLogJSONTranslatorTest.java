@@ -45,6 +45,20 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testEnumTypedValueTrend() {
+		final String source = "<trend> Minus";
+		final String expected = "\"Minus\"";
+		testTraslateRule(source, expected, parser -> parser.enumTypedValue());
+	}
+
+	@Test
+	public void testEnumTypedValueStatus() {
+		final String source = "<status> Ok";
+		final String expected = "\"Ok\"";
+		testTraslateRule(source, expected, parser -> parser.enumTypedValue());
+	}
+
+	@Test
 	public void testDoubleValue() {
 		final String source = "<double> 0.87687867";
 		final String expected = "0.87687867";
@@ -114,7 +128,7 @@ public class ProtocolLogJSONTranslatorTest {
 		System.out.println("===================================================================");
 		System.out.println("Protocol log: " + source);
 		System.out.println("JSON: " + actual);
-		
+
 		// Assert
 		Assert.assertEquals(expected, actual);
 	}

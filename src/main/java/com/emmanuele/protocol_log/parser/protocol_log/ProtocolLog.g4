@@ -158,18 +158,10 @@ value
 	| doubleValue
 	| datetimeValue
 	| timestampValue
+	| enumTypedValue
 	| filterValue
-	| statusValue
-	| gridViewRowScopeValue
-	| gridViewModeValue
-	| gridRowDataTypeValue
-	| gridViewFilterConditionTypeValue
-	| gridViewFilterLogicalOperationValue
-	| gridViewSelectionUsageValue
 	| streamMessageIdentifiersValue
-	| subscriptionTypeValue
 	| requestTypeValue
-	| strategyStateValue
 	| vectorValue
 	| tableValue
 	| message
@@ -177,11 +169,6 @@ value
 	| namedUuid
 	| parametersValue
 	| viidValue
-	| surplusDirectionValue
-	| trendValue
-	| instrumentMarketDataStatusValue
-	| instrumentTradingPhaseValue
-	| instrumentTradingStatusValue
 	| STRING
 	| EMPTY_VALUE
 ;
@@ -204,34 +191,25 @@ namedUuid
 	)+ '(' UUID ')'
 ;
 
-instrumentMarketDataStatusValue
+enumTypedValue
 :
-	'<instrument market data status>' STRING
-;
-
-instrumentTradingPhaseValue
-:
-	'<instrument trading phase>' STRING
-;
-
-instrumentTradingStatusValue
-:
-	'<instrument trading status>' STRING
-;
-
-surplusDirectionValue
-:
-	'<surplus direction>' STRING
-;
-
-trendValue
-:
-	'<trend>' STRING
-;
-
-statusValue
-:
-	'<status>' STRING
+	(
+		'<strategy state>'
+		| '<calculated values request>'
+		| '<grid view selection usage>'
+		| '<grid view filter logical operation>'
+		| '<grid view filter condition type>'
+		| '<grid row data type>'
+		| '<grid view mode>'
+		| '<grid view row scope>'
+		| '<instrument market data status>'
+		| '<instrument trading phase>'
+		| '<instrument trading status>'
+		| '<surplus direction>'
+		| '<trend>'
+		| '<status>'
+		| '<subscription type>'
+	) STRING
 ;
 
 booleanValue
@@ -279,15 +257,6 @@ datetimeValue
 timestampValue
 :
 	DATE TIME STRING
-;
-
-subscriptionTypeValue
-:
-	'<subscription type>'
-	(
-		'Snapshot'
-		| 'SnapshotAndLive'
-	)
 ;
 
 streamMessageIdentifiersValue
@@ -347,44 +316,9 @@ anyValue
 	'<any>' value
 ;
 
-gridViewRowScopeValue
-:
-	'<grid view row scope>' STRING
-;
-
-gridViewModeValue
-:
-	'<grid view mode>' STRING
-;
-
-gridRowDataTypeValue
-:
-	'<grid row data type>' STRING
-;
-
-gridViewFilterConditionTypeValue
-:
-	'<grid view filter condition type>' STRING
-;
-
-gridViewFilterLogicalOperationValue
-:
-	'<grid view filter logical operation>' STRING
-;
-
-gridViewSelectionUsageValue
-:
-	'<grid view selection usage>' STRING
-;
-
 requestTypeValue
 :
 	'<calculated values request>'
-;
-
-strategyStateValue
-:
-	'<strategy state>' STRING
 ;
 
 parametersValue
