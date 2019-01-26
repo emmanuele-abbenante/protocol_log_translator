@@ -142,11 +142,14 @@ identifiedFieldKey
 
 // VALUES
 
+//TODO rename typed values in "typedValue"
+
 value
 :
 	uuidValue
 	| booleanValue
 	| stringValue
+	| integerTypedValue
 	| integerValue
 	| uintegerValue
 	| int32Value
@@ -240,9 +243,14 @@ booleanValue
 	)
 ;
 
-integerValue
+integerTypedValue
 :
 	'<integer>' INTEGER
+;
+
+integerValue
+:
+	INTEGER
 ;
 
 uintegerValue
@@ -270,17 +278,7 @@ datetimeValue
 
 timestampValue
 :
-	date time STRING
-;
-
-date
-:
-	INTEGER '-' INTEGER '-' INTEGER
-;
-
-time
-:
-	INTEGER ':' INTEGER ':' DOUBLE
+	DATE TIME STRING
 ;
 
 subscriptionTypeValue
@@ -639,10 +637,23 @@ HEX_STRING
 
 DOUBLE
 :
-	INTEGER
+	'-'? INTEGER
 	(
 		'.' INTEGER
+		(
+			'e' '-'? INTEGER
+		)?
 	)?
+;
+
+DATE
+:
+	INTEGER '-' INTEGER '-' INTEGER
+;
+
+TIME
+:
+	INTEGER ':' INTEGER ':' DOUBLE
 ;
 
 STRING

@@ -364,6 +364,18 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterIntegerTypedValue(ProtocolLogParser.IntegerTypedValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIntegerTypedValue(ProtocolLogParser.IntegerTypedValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIntegerValue(ProtocolLogParser.IntegerValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -419,30 +431,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTimestampValue(ProtocolLogParser.TimestampValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDate(ProtocolLogParser.DateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDate(ProtocolLogParser.DateContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTime(ProtocolLogParser.TimeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTime(ProtocolLogParser.TimeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

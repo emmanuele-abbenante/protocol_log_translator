@@ -68,7 +68,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 
 	@Override
 	public void exitTimestampValue(ProtocolLogParser.TimestampValueContext ctx) {
-		final String timestampString = String.format(TIMESTAMP_PATTERN, ctx.date().getText(), ctx.time().getText(),
+		final String timestampString = String.format(TIMESTAMP_PATTERN, ctx.DATE().getText(), ctx.TIME().getText(),
 				ctx.STRING().getText());
 		setJSON(ctx, addQuotes(timestampString));
 	}
@@ -291,10 +291,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 
 	@Override
 	public void exitDatetimeValue(ProtocolLogParser.DatetimeValueContext ctx) {
-		ProtocolLogParser.TimestampValueContext timestamp = ctx.timestampValue();
-		final String timestampString = String.format(TIMESTAMP_PATTERN, timestamp.date().getText(),
-				timestamp.time().getText(), timestamp.STRING().getText());
-		setJSON(ctx, addQuotes(timestampString));
+		setJSON(ctx, getJSON(ctx.timestampValue()));
 	}
 
 	@Override

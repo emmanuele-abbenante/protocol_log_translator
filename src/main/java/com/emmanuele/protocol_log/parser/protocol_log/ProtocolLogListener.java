@@ -298,6 +298,16 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitBooleanValue(ProtocolLogParser.BooleanValueContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#integerTypedValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntegerTypedValue(ProtocolLogParser.IntegerTypedValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#integerTypedValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntegerTypedValue(ProtocolLogParser.IntegerTypedValueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#integerValue}.
 	 * @param ctx the parse tree
 	 */
@@ -347,26 +357,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTimestampValue(ProtocolLogParser.TimestampValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#date}.
-	 * @param ctx the parse tree
-	 */
-	void enterDate(ProtocolLogParser.DateContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#date}.
-	 * @param ctx the parse tree
-	 */
-	void exitDate(ProtocolLogParser.DateContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#time}.
-	 * @param ctx the parse tree
-	 */
-	void enterTime(ProtocolLogParser.TimeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#time}.
-	 * @param ctx the parse tree
-	 */
-	void exitTime(ProtocolLogParser.TimeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#subscriptionTypeValue}.
 	 * @param ctx the parse tree
