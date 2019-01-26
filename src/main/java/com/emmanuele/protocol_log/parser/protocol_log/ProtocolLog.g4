@@ -161,6 +161,7 @@ value
 	| anyValue
 	| parametersValue
 	| viidValue
+	| errorValue
 	| STRING
 	| EMPTY_VALUE
 ;
@@ -309,6 +310,11 @@ viidValue
 	)* '{' STRING '}'
 ;
 
+errorValue
+:
+	'<error double>' QUOTED_STRING
+;
+
 vectorValue
 :
 	uuidVector
@@ -402,20 +408,8 @@ column
 		uuidValue
 	) ']' '='
 	(
-		tableCellValue
+		value
 	)
-;
-
-tableCellValue
-:
-	errorDoubleValue
-	| doubleValue
-	| EMPTY_VALUE
-;
-
-errorDoubleValue
-:
-	'<error double>' QUOTED_STRING
 ;
 
 columnsRequest

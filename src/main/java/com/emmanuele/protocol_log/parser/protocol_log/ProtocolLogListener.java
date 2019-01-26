@@ -368,6 +368,16 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitViidValue(ProtocolLogParser.ViidValueContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ProtocolLogParser#errorValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterErrorValue(ProtocolLogParser.ErrorValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ProtocolLogParser#errorValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitErrorValue(ProtocolLogParser.ErrorValueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#vectorValue}.
 	 * @param ctx the parse tree
 	 */
@@ -487,26 +497,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitColumn(ProtocolLogParser.ColumnContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#tableCellValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterTableCellValue(ProtocolLogParser.TableCellValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#tableCellValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitTableCellValue(ProtocolLogParser.TableCellValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#errorDoubleValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterErrorDoubleValue(ProtocolLogParser.ErrorDoubleValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#errorDoubleValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitErrorDoubleValue(ProtocolLogParser.ErrorDoubleValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#columnsRequest}.
 	 * @param ctx the parse tree

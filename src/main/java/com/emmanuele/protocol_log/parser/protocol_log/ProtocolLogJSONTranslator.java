@@ -316,7 +316,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
-	public void exitErrorDoubleValue(ProtocolLogParser.ErrorDoubleValueContext ctx) {
+	public void exitErrorValue(ProtocolLogParser.ErrorValueContext ctx) {
 		setJSON(ctx, ctx.QUOTED_STRING().getText());
 	}
 
@@ -493,15 +493,8 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 		final StringBuilder buf = new StringBuilder();
 		buf.append(String.format(PAIR_PATTERN, "column", getJSON(ctx.uuidValue())));
 		buf.append(",");
-		buf.append(String.format(PAIR_PATTERN, "value", getJSON(ctx.tableCellValue())));
+		buf.append(String.format(PAIR_PATTERN, "value", getJSON(ctx.value())));
 		setJSON(ctx, addBraces(buf.toString()));
-	}
-
-	@Override
-	public void exitTableCellValue(ProtocolLogParser.TableCellValueContext ctx) {
-		// Retrieving translation of child rule
-		final ParserRuleContext value = ctx.getRuleContext(ParserRuleContext.class, 0);
-		setJSON(ctx, getJSON(value));
 	}
 
 	// UTILITY METHODS

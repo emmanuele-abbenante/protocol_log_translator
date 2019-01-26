@@ -448,6 +448,18 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterErrorValue(ProtocolLogParser.ErrorValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitErrorValue(ProtocolLogParser.ErrorValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterVectorValue(ProtocolLogParser.VectorValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -587,30 +599,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitColumn(ProtocolLogParser.ColumnContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTableCellValue(ProtocolLogParser.TableCellValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTableCellValue(ProtocolLogParser.TableCellValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterErrorDoubleValue(ProtocolLogParser.ErrorDoubleValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitErrorDoubleValue(ProtocolLogParser.ErrorDoubleValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

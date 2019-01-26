@@ -103,13 +103,6 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
-	public void testTableCellValue() {
-		final String source = "<double> 0.87687867";
-		final String expected = "0.87687867";
-		testTraslateRule(source, expected, parser -> parser.tableCellValue());
-	}
-
-	@Test
 	public void testEnumTypedValueTrend() {
 		final String source = "<trend> Minus";
 		final String expected = "\"Minus\"";
@@ -152,17 +145,17 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
-	public void testErrorDoubleValue() {
-		final String source = "<error double> \"Instrument definitions not received\"";
-		final String expected = "\"Instrument definitions not received\"";
-		testTraslateRule(source, expected, parser -> parser.errorDoubleValue());
-	}
-
-	@Test
 	public void testBooleanValue() {
 		final String source = "<boolean> false";
 		final String expected = "false";
 		testTraslateRule(source, expected, parser -> parser.booleanValue());
+	}
+
+	@Test
+	public void testErrorValue() {
+		final String source = "<error double> \"Instrument definitions not received\"";
+		final String expected = "\"Instrument definitions not received\"";
+		testTraslateRule(source, expected, parser -> parser.errorValue());
 	}
 
 	@Test
