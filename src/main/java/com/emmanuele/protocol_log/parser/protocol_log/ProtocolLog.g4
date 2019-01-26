@@ -495,7 +495,11 @@ rowId
 
 column
 :
-	'[' namedUuid ']' '='
+	'['
+	(
+		namedUuid
+		| UUID
+	) ']' '='
 	(
 		tableCellValue
 	)
@@ -505,6 +509,7 @@ tableCellValue
 :
 	errorDoubleValue
 	| doubleValue
+	| EMPTY_VALUE
 ;
 
 errorDoubleValue
