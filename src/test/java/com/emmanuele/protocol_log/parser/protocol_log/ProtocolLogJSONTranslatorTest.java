@@ -247,6 +247,31 @@ public class ProtocolLogJSONTranslatorTest {
 		testTraslateRule(source, expected, parser -> parser.columnRequestWithParams());
 	}
 
+	@Test
+	public void testOverrides() {
+		final String source = "Overrides [1] =\n" + 
+				"     [2e79bd1a-b73e-11e8-a320-76ea49461d8a]: UPDATE: {\n" + 
+				"    instrument parameters = [3] {\n" + 
+				"      Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368) = <uuid> 2e79bd1a-b73e-11e8-a320-76ea49461d8a\n" + 
+				"      Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e) = <double> 0.57457111995836085\n" + 
+				"      Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01) = <double> 0.57457111995836085\n" + 
+				"    }\n" + 
+				"  }";
+		final String expected = "\"Overrides\":{\"rowId\":\"2e79bd1a-b73e-11e8-a320-76ea49461d8a\",\"instrument parameters\":{\"Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368)\":\"2e79bd1a-b73e-11e8-a320-76ea49461d8a\",\"Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e)\":0.57457111995836085,\"Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01)\":0.57457111995836085}}";
+		testTraslateRule(source, expected, parser -> parser.overrides());
+	}
+
+	@Test
+	public void testOverriddenParameters() {
+		final String source = "[3] {\n"
+				+ "      Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368) = <uuid> 2e79bd1a-b73e-11e8-a320-76ea49461d8a\n"
+				+ "      Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e) = <double> 0.57457111995836085\n"
+				+ "      Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01) = <double> 0.57457111995836085\n"
+				+ "    }";
+		final String expected = "{\"Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368)\":\"2e79bd1a-b73e-11e8-a320-76ea49461d8a\",\"Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e)\":0.57457111995836085,\"Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01)\":0.57457111995836085}";
+		testTraslateRule(source, expected, parser -> parser.overriddenParameters());
+	}
+
 	private void testTraslateRule(final String source, final String expected, final ParseCommand command) {
 		// Arrange
 		final ProtocolLogLexer lexer = new ProtocolLogLexer(CharStreams.fromString(source));

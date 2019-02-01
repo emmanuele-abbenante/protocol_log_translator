@@ -473,7 +473,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 		if (buf.length() > 0) {
 			buf.deleteCharAt(buf.length() - 1);
 		}
-		setJSON(ctx, buf.toString());
+		setJSON(ctx, addBraces(buf.toString()));
 	}
 
 	@Override
