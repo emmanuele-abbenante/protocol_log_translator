@@ -108,86 +108,84 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
-	public void testUuidValueTypedUuid() {
+	public void testUuidValue_TypedUuid() {
 		final String source = "<uuid> 54b148ce-2091-11e9-bd60-e7ffa3dffd67";
 		final String expected = "\"54b148ce-2091-11e9-bd60-e7ffa3dffd67\"";
 		testTraslateRule(source, expected, parser -> parser.uuidValue());
 	}
 
 	@Test
-	public void testUuidValueUuid() {
+	public void testUuidValue_Uuid() {
 		final String source = "54b148ce-2091-11e9-bd60-e7ffa3dffd67";
 		final String expected = "\"54b148ce-2091-11e9-bd60-e7ffa3dffd67\"";
 		testTraslateRule(source, expected, parser -> parser.uuidValue());
 	}
 
 	@Test
-	public void testUuidValueTypedNamedUuid() {
+	public void testUuidValue_TypedNamedUuid() {
 		final String source = "<uuid> Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)";
 		final String expected = "\"Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\"";
 		testTraslateRule(source, expected, parser -> parser.uuidValue());
 	}
 
 	@Test
-	public void testUuidValueNamedUuid() {
+	public void testUuidValue_NamedUuid() {
 		final String source = "Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)";
 		final String expected = "\"Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\"";
 		testTraslateRule(source, expected, parser -> parser.uuidValue());
 	}
 
 	@Test
-	public void testUuidValueEmpty() {
+	public void testUuidValue_Empty() {
 		final String source = "<uuid> <empty>";
 		final String expected = "null";
 		testTraslateRule(source, expected, parser -> parser.uuidValue());
 	}
 
 	@Test
-	public void testUuidVector() {
-		final String source = "<vector of uuid> [3]\n" + "    0 = Dividends (8716833d-2951-4815-88bb-3c87e3637eb8)\n"
-				+ "    1 = Dividend time fallback (0ec616b3-b779-11e4-bb45-245e0d1c06b7)\n"
-				+ "    2 = Dividend tax rule (39c3f1b1-900e-11e8-9e47-f1bbe9ebb3a6)";
-		final String expected = "[\"Dividends (8716833d-2951-4815-88bb-3c87e3637eb8)\",\"Dividend time fallback (0ec616b3-b779-11e4-bb45-245e0d1c06b7)\",\"Dividend tax rule (39c3f1b1-900e-11e8-9e47-f1bbe9ebb3a6)\"]";
-		testTraslateRule(source, expected, parser -> parser.uuidVector());
-	}
-
-	@Test
-	public void testEnumTypedValueTrend() {
+	public void testEnumTypedValue_Trend() {
 		final String source = "<trend> Minus";
 		final String expected = "\"Minus\"";
 		testTraslateRule(source, expected, parser -> parser.enumValue());
 	}
 
 	@Test
-	public void testEnumTypedValueStatus() {
+	public void testEnumTypedValue_Status() {
 		final String source = "<status> Ok";
 		final String expected = "\"Ok\"";
 		testTraslateRule(source, expected, parser -> parser.enumValue());
 	}
 
 	@Test
-	public void testIntegerValueInteger() {
+	public void testIntegerValue_Integer() {
 		final String source = "<integer> 3";
 		final String expected = "3";
 		testTraslateRule(source, expected, parser -> parser.integerValue());
 	}
 
 	@Test
-	public void testIntegerValueUint32() {
+	public void testIntegerValue_Uint32() {
 		final String source = "<uint32> 250000";
 		final String expected = "250000";
 		testTraslateRule(source, expected, parser -> parser.integerValue());
 	}
 
 	@Test
-	public void testDoubleValueDouble() {
+	public void testStringValue() {
+		final String source = "<string> \"Extraction at time 22:05:00 completed\"";
+		final String expected = "\"Extraction at time 22:05:00 completed\"";
+		testTraslateRule(source, expected, parser -> parser.stringValue());
+	}
+
+	@Test
+	public void testDoubleValue_Double() {
 		final String source = "<double> 0.87687867";
 		final String expected = "0.87687867";
 		testTraslateRule(source, expected, parser -> parser.doubleValue());
 	}
 
 	@Test
-	public void testDoubleValueInteger() {
+	public void testDoubleValue_Integer() {
 		final String source = "<double> 34";
 		final String expected = "34";
 		testTraslateRule(source, expected, parser -> parser.doubleValue());
@@ -201,10 +199,63 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testRequestTypeValue() {
+		final String source = "<calculated values request>";
+		final String expected = "\"<calculated values request>\"";
+		testTraslateRule(source, expected, parser -> parser.requestTypeValue());
+	}
+
+	@Test
 	public void testErrorValue() {
 		final String source = "<error double> \"Instrument definitions not received\"";
 		final String expected = "\"Instrument definitions not received\"";
 		testTraslateRule(source, expected, parser -> parser.errorValue());
+	}
+
+	@Test
+	public void testVectorValue() {
+		final String source = "<vector of boolean> [2]\n" + "    0 = 1\n" + "    1 = 0";
+		final String expected = "[true,false]";
+		testTraslateRule(source, expected, parser -> parser.vectorValue());
+	}
+
+	@Test
+	public void testUuidVector() {
+		final String source = "<vector of uuid> [3]\n" + "    0 = Dividends (8716833d-2951-4815-88bb-3c87e3637eb8)\n"
+				+ "    1 = Dividend time fallback (0ec616b3-b779-11e4-bb45-245e0d1c06b7)\n"
+				+ "    2 = Dividend tax rule (39c3f1b1-900e-11e8-9e47-f1bbe9ebb3a6)";
+		final String expected = "[\"Dividends (8716833d-2951-4815-88bb-3c87e3637eb8)\",\"Dividend time fallback (0ec616b3-b779-11e4-bb45-245e0d1c06b7)\",\"Dividend tax rule (39c3f1b1-900e-11e8-9e47-f1bbe9ebb3a6)\"]";
+		testTraslateRule(source, expected, parser -> parser.uuidVector());
+	}
+
+	@Test
+	public void testBooleanVector() {
+		final String source = "<vector of boolean> [2]\n" + "    0 = 1\n" + "    1 = 0";
+		final String expected = "[true,false]";
+		testTraslateRule(source, expected, parser -> parser.booleanVector());
+	}
+
+	@Test
+	public void testIntegerVectorPair() {
+		final String source = "1 = 0";
+		final String expected = "0";
+		testTraslateRule(source, expected, parser -> parser.integerVectorPair());
+	}
+
+	@Test
+	public void testUint32Vector() {
+		final String source = "<vector of uint32> [4]\n" + "    0 = 0\n" + "    1 = 0\n" + "    2 = 0\n" + "    3 = 0";
+		final String expected = "[0,0,0,0]";
+		testTraslateRule(source, expected, parser -> parser.uint32Vector());
+	}
+
+	@Test
+	public void testAnyVector() {
+		final String source = "<vector of any> [4]\n" + "    0 = <integer> 1\n"
+				+ "    1 = <datetime> 2019-01-03 22:45:16.841148 CET\n" + "    2 = <uinteger> 481\n"
+				+ "    3 = <string> \"Extraction at time 22:45:15 completed\"";
+		final String expected = "[1,\"2019-01-03 22:45:16.841148 CET\",481,\"Extraction at time 22:45:15 completed\"]";
+		testTraslateRule(source, expected, parser -> parser.anyVector());
 	}
 
 	@Test
@@ -219,6 +270,13 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testColumnRequest() {
+		final String source = "[Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)]: UPDATE: {Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)\n}";
+		final String expected = "\"Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)\"";
+		testTraslateRule(source, expected, parser -> parser.columnRequest());
+	}
+
+	@Test
 	public void testColumnsRequestWithParams() {
 		final String source = "Columns [2] =\n"
 				+ "     [Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)]: UPDATE: {Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)\n"
@@ -228,13 +286,6 @@ public class ProtocolLogJSONTranslatorTest {
 				+ "    }\n" + "  }";
 		final String expected = "\"Columns\":[\"Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)\",{\"columnRequestId\":\"54b3a3e4-2091-11e9-bd60-e7ffa3dffd67\",\"column\":\"Delta (46acd072-d577-443e-a13f-1ea90b5c62e1)\",\"parameters\":{\"Parameter context ranking (68aa0456-b6eb-11e1-9b1c-06b747deb312)\":\"Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\"}}]";
 		testTraslateRule(source, expected, parser -> parser.columnsRequest());
-	}
-
-	@Test
-	public void testColumnRequest() {
-		final String source = "[Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)]: UPDATE: {Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)\n}";
-		final String expected = "\"Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)\"";
-		testTraslateRule(source, expected, parser -> parser.columnRequest());
 	}
 
 	@Test

@@ -343,9 +343,13 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	@Override
 	public void exitIntegerVectorPair(ProtocolLogParser.IntegerVectorPairContext ctx) {
 		final ParserRuleContext parent = ctx.getParent();
-		if (parent instanceof ProtocolLogParser.BooleanVectorContext) {
-			setJSON(ctx, "1".equals(ctx.INTEGER(1).getText()) ? TRUE_VALUE : FALSE_VALUE);
-		} else if (parent instanceof ProtocolLogParser.Uint32VectorContext) {
+		if (parent != null) {
+			if (parent instanceof ProtocolLogParser.BooleanVectorContext) {
+				setJSON(ctx, "1".equals(ctx.INTEGER(1).getText()) ? TRUE_VALUE : FALSE_VALUE);
+			} else if (parent instanceof ProtocolLogParser.Uint32VectorContext) {
+				setJSON(ctx, ctx.INTEGER(1).getText());
+			}
+		} else {
 			setJSON(ctx, ctx.INTEGER(1).getText());
 		}
 	}
