@@ -433,7 +433,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	public void exitRowRequestKey(ProtocolLogParser.RowRequestKeyContext ctx) {
 		final StringBuilder buf = new StringBuilder();
 		final String fieldKey = getJSON(ctx.fieldKey());
-		buf.append(buildPair(addQuotes("rowKeyField"), addQuotes(fieldKey)));
+		buf.append(buildPair(addQuotes("rowKeyField"), fieldKey));
 		buf.append(",");
 		buf.append(buildPair(addQuotes("rowKeyValue"), ctx.rowKeyValue()));
 		setJSON(ctx, addBraces(buf.toString()));

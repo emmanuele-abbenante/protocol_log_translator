@@ -238,7 +238,30 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
-	public void testColumnRequestWithParams() {
+	public void testRowRequestsList() {
+		final String source = "Rows [10] =\n"
+				+ "    [0c909246-2093-11e9-bd60-e7ffa3dffd67]: UPDATE: ivid:{instrument:f8b279be-9655-11e8-96b0-c53d96bb3220}\n"
+				+ "    [0c90f48e-2093-11e9-bd60-e7ffa3dffd67]: UPDATE: ivid:{instrument:7b983838-e439-11e8-abb0-d32a28bad6d5}";
+		final String expected = "\"Rows\":[{\"rowId\":\"0c909246-2093-11e9-bd60-e7ffa3dffd67\",\"rowKey\":{\"rowKeyField\":\"ivid\",\"rowKeyValue\":{\"instrument\":\"f8b279be-9655-11e8-96b0-c53d96bb3220\"}}},{\"rowId\":\"0c90f48e-2093-11e9-bd60-e7ffa3dffd67\",\"rowKey\":{\"rowKeyField\":\"ivid\",\"rowKeyValue\":{\"instrument\":\"7b983838-e439-11e8-abb0-d32a28bad6d5\"}}}]";
+		testTraslateRule(source, expected, parser -> parser.rowRequestsList());
+	}
+
+	@Test
+	public void testRowRequest() {
+		final String source = "[ec6c3f72-0398-11e9-3a85-8d362a43669d]: UPDATE: ivid:{instrument:2e79bd1a-b73e-11e8-a320-76ea49461d8a}";
+		final String expected = "{\"rowId\":\"ec6c3f72-0398-11e9-3a85-8d362a43669d\",\"rowKey\":{\"rowKeyField\":\"ivid\",\"rowKeyValue\":{\"instrument\":\"2e79bd1a-b73e-11e8-a320-76ea49461d8a\"}}}";
+		testTraslateRule(source, expected, parser -> parser.rowRequest());
+	}
+
+	@Test
+	public void testRowId() {
+		final String source = "b320a884-d8e4-4a0a-9cec-d6ace19f04ee";
+		final String expected = "\"b320a884-d8e4-4a0a-9cec-d6ace19f04ee\"";
+		testTraslateRule(source, expected, parser -> parser.rowId());
+	}
+
+	@Test
+	public void testColumnRequest_WithParams() {
 		final String source = "[54b3a3e4-2091-11e9-bd60-e7ffa3dffd67]: UPDATE: {\n"
 				+ "    id = Delta (46acd072-d577-443e-a13f-1ea90b5c62e1)\n" + "    parameters = [1] {\n"
 				+ "      Parameter context ranking (68aa0456-b6eb-11e1-9b1c-06b747deb312) = <uuid> Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\n"
@@ -248,15 +271,34 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testRowRequestKey() {
+		final String source = "ivid:{instrument:f044a41a-9654-11e8-96b0-c53d96bb3220;venue:0b97a38e-2093-11e9-004f-8b62ff7f0000}";
+		final String expected = "{\"rowKeyField\":\"ivid\",\"rowKeyValue\":{\"instrument\":\"f044a41a-9654-11e8-96b0-c53d96bb3220\",\"venue\":\"0b97a38e-2093-11e9-004f-8b62ff7f0000\"}}";
+		testTraslateRule(source, expected, parser -> parser.rowRequestKey());
+	}
+
+	@Test
+	public void testRowKeyValue_SingleField() {
+		final String source = "{instrument:f044a41a-9654-11e8-96b0-c53d96bb3220}";
+		final String expected = "{\"instrument\":\"f044a41a-9654-11e8-96b0-c53d96bb3220\"}";
+		testTraslateRule(source, expected, parser -> parser.rowKeyValue());
+	}
+
+	@Test
+	public void testRowKeyValue_MultipleFields() {
+		final String source = "{instrument:f044a41a-9654-11e8-96b0-c53d96bb3220;venue:0b97a38e-2093-11e9-004f-8b62ff7f0000}";
+		final String expected = "{\"instrument\":\"f044a41a-9654-11e8-96b0-c53d96bb3220\",\"venue\":\"0b97a38e-2093-11e9-004f-8b62ff7f0000\"}";
+		testTraslateRule(source, expected, parser -> parser.rowKeyValue());
+	}
+
+	@Test
 	public void testOverrides() {
-		final String source = "Overrides [1] =\n" + 
-				"     [2e79bd1a-b73e-11e8-a320-76ea49461d8a]: UPDATE: {\n" + 
-				"    instrument parameters = [3] {\n" + 
-				"      Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368) = <uuid> 2e79bd1a-b73e-11e8-a320-76ea49461d8a\n" + 
-				"      Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e) = <double> 0.57457111995836085\n" + 
-				"      Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01) = <double> 0.57457111995836085\n" + 
-				"    }\n" + 
-				"  }";
+		final String source = "Overrides [1] =\n" + "     [2e79bd1a-b73e-11e8-a320-76ea49461d8a]: UPDATE: {\n"
+				+ "    instrument parameters = [3] {\n"
+				+ "      Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368) = <uuid> 2e79bd1a-b73e-11e8-a320-76ea49461d8a\n"
+				+ "      Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e) = <double> 0.57457111995836085\n"
+				+ "      Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01) = <double> 0.57457111995836085\n"
+				+ "    }\n" + "  }";
 		final String expected = "\"Overrides\":{\"rowId\":\"2e79bd1a-b73e-11e8-a320-76ea49461d8a\",\"instrument parameters\":{\"Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368)\":\"2e79bd1a-b73e-11e8-a320-76ea49461d8a\",\"Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e)\":0.57457111995836085,\"Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01)\":0.57457111995836085}}";
 		testTraslateRule(source, expected, parser -> parser.overrides());
 	}
