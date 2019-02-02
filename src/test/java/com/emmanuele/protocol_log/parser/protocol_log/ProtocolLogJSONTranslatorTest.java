@@ -9,9 +9,48 @@ import org.junit.Test;
 
 public class ProtocolLogJSONTranslatorTest {
 
-	// TODO testFile
+	@Test
+	public void testFile() {
+		final String source = "2019-01-04 12:57:44.885409 CET tbrx0apcm01vs tb_test_tp@tb_test/tb_test_tp[39102:39463] protocol.in <debug> src/common.cpp(74): Received StreamOpenRequest from tb_test_ae@tb_test [local 10.240.217.16:57820]\n" + 
+				"<message> (138) StreamOpenRequest, <protocol> (18) TradeProtocol, <size> [186]\n" + 
+				"{\n" + 
+				"  operator = <uuid> DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\n" + 
+				"  pet = <uuid> <empty>\n" + 
+				"  stream identifier = <uuid> f26a3b96-1017-11e9-00da-58a7ff7f0000\n" + 
+				"  stream message identifiers = {'Trade'}\n" + 
+				"  subscription type = <subscription type> SnapshotAndLive\n" + 
+				"  suppress reply = <boolean> false\n" + 
+				"  use full updates only = <boolean> true\n" + 
+				"}\n" + 
+				"\n" + 
+				"2019-01-04 12:57:44.885503 CET tbrx0apcm01vs tb_test_tp@tb_test/tb_test_tp[39102:39463] protocol.out <debug> src/common.cpp(98): Send StreamOpenReply to tb_test_ae@tb_test [local 10.240.217.16:57820]\n" + 
+				"<message> (1006) StreamOpenReply, <protocol> (18) TradeProtocol, <size> [55]\n" + 
+				"{\n" + 
+				"  pet = <uuid> <empty>\n" + 
+				"  status = <status> Ok\n" + 
+				"  stream identifier = <uuid> f26a3b96-1017-11e9-00da-58a7ff7f0000\n" + 
+				"}\n" + 
+				"";
+		final String expected = "[{\"timestamp\":\"2019-01-04 12:57:44.885409 CET\",\"host\":\"tbrx0apcm01vs\",\"localComponent\":{\"component\":\"tb_test_tp\",\"system\":\"tb_test\"},\"direction\":\"in\",\"remoteComponent\":{\"component\":\"tb_test_ae\",\"system\":\"tb_test\"},\"message\":{\"messageType\":\"StreamOpenRequest\",\"protocolType\":\"TradeProtocol\",\"operator\":\"DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\",\"pet\":null,\"stream identifier\":\"f26a3b96-1017-11e9-00da-58a7ff7f0000\",\"stream message identifiers\":[\"Trade\"],\"subscription type\":\"SnapshotAndLive\",\"suppress reply\":false,\"use full updates only\":true}},{\"timestamp\":\"2019-01-04 12:57:44.885503 CET\",\"host\":\"tbrx0apcm01vs\",\"localComponent\":{\"component\":\"tb_test_tp\",\"system\":\"tb_test\"},\"direction\":\"out\",\"remoteComponent\":{\"component\":\"tb_test_ae\",\"system\":\"tb_test\"},\"message\":{\"messageType\":\"StreamOpenReply\",\"protocolType\":\"TradeProtocol\",\"pet\":null,\"status\":\"Ok\",\"stream identifier\":\"f26a3b96-1017-11e9-00da-58a7ff7f0000\"}}]";
+		testTraslateRule(source, expected, parser -> parser.file());
+	}
 
-	// TODO testLogEntry
+	@Test
+	public void testLogEntry() {
+		final String source = "2019-01-04 12:57:44.885409 CET tbrx0apcm01vs tb_test_tp@tb_test/tb_test_tp[39102:39463] protocol.in <debug> src/common.cpp(74): Received StreamOpenRequest from tb_test_ae@tb_test [local 10.240.217.16:57820]\n" + 
+				"<message> (138) StreamOpenRequest, <protocol> (18) TradeProtocol, <size> [186]\n" + 
+				"{\n" + 
+				"  operator = <uuid> DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\n" + 
+				"  pet = <uuid> <empty>\n" + 
+				"  stream identifier = <uuid> f26a3b96-1017-11e9-00da-58a7ff7f0000\n" + 
+				"  stream message identifiers = {'Trade'}\n" + 
+				"  subscription type = <subscription type> SnapshotAndLive\n" + 
+				"  suppress reply = <boolean> false\n" + 
+				"  use full updates only = <boolean> true\n" + 
+				"}";
+		final String expected = "{\"timestamp\":\"2019-01-04 12:57:44.885409 CET\",\"host\":\"tbrx0apcm01vs\",\"localComponent\":{\"component\":\"tb_test_tp\",\"system\":\"tb_test\"},\"direction\":\"in\",\"remoteComponent\":{\"component\":\"tb_test_ae\",\"system\":\"tb_test\"},\"message\":{\"messageType\":\"StreamOpenRequest\",\"protocolType\":\"TradeProtocol\",\"operator\":\"DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\",\"pet\":null,\"stream identifier\":\"f26a3b96-1017-11e9-00da-58a7ff7f0000\",\"stream message identifiers\":[\"Trade\"],\"subscription type\":\"SnapshotAndLive\",\"suppress reply\":false,\"use full updates only\":true}}";
+		testTraslateRule(source, expected, parser -> parser.logEntry());
+	}
 
 	@Test
 	public void testHeader() {
@@ -76,7 +115,47 @@ public class ProtocolLogJSONTranslatorTest {
 		testTraslateRule(source, expected, parser -> parser.messageType());
 	}
 
-	// TODO testMessage
+	@Test
+	public void testMessage() {
+		final String source = "<message> (138) StreamOpenRequest, <protocol> (63) CalculatedValuesProtocol, <size> [785]\n"
+				+ "{\n" + "  calculated values request = <calculated values request> \n" + "  type = full\n"
+				+ "  Columns [11] =\n"
+				+ "     [Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)]: UPDATE: {Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)\n"
+				+ "  }\n"
+				+ "     [Rho (36b677f4-2f5e-4baf-a57a-3dd93304499b)]: UPDATE: {Rho (36b677f4-2f5e-4baf-a57a-3dd93304499b)\n"
+				+ "  }\n"
+				+ "     [Yield (40009b86-2b19-11e1-933b-47deb3124dc8)]: UPDATE: {Yield (40009b86-2b19-11e1-933b-47deb3124dc8)\n"
+				+ "  }\n"
+				+ "     [Forward price (db1b9115-347c-4c4a-a796-9e493518f705)]: UPDATE: {Forward price (db1b9115-347c-4c4a-a796-9e493518f705)\n"
+				+ "  }\n"
+				+ "     [Delta (46acd072-d577-443e-a13f-1ea90b5c62e1)]: UPDATE: {Delta (46acd072-d577-443e-a13f-1ea90b5c62e1)\n"
+				+ "  }\n"
+				+ "     [Gamma (8d2eb853-fb2f-4e11-9e75-64e414131951)]: UPDATE: {Gamma (8d2eb853-fb2f-4e11-9e75-64e414131951)\n"
+				+ "  }\n"
+				+ "     [Vega (775faa53-667f-4674-a875-66ab1f18b684)]: UPDATE: {Vega (775faa53-667f-4674-a875-66ab1f18b684)\n"
+				+ "  }\n"
+				+ "     [Theta (de75f175-d03f-11e3-bccb-3e99245e0d1c)]: UPDATE: {Theta (de75f175-d03f-11e3-bccb-3e99245e0d1c)\n"
+				+ "  }\n"
+				+ "     [Financing rate (35e24161-94c7-413c-9ca2-750b11875ee9)]: UPDATE: {Financing rate (35e24161-94c7-413c-9ca2-750b11875ee9)\n"
+				+ "  }\n"
+				+ "     [Fair market price (33efb879-baf3-4ce1-bec0-8600f21af8cd)]: UPDATE: {Fair market price (33efb879-baf3-4ce1-bec0-8600f21af8cd)\n"
+				+ "  }\n" + "  Rows [1] =\n"
+				+ "     [0b981bca-2093-11e9-b23a-4bc1bb59529c]: UPDATE: ivid:{instrument:f06153e4-9654-11e8-96b0-c53d96bb3220}\n"
+				+ "  Overrides [1] =\n" + "     [f06153e4-9654-11e8-96b0-c53d96bb3220]: UPDATE: {\n"
+				+ "    instrument parameters = [3] {\n"
+				+ "      Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368) = <uuid> f06153e4-9654-11e8-96b0-c53d96bb3220\n"
+				+ "      Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e) = <double> 1446.7\n"
+				+ "      Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01) = <double> 1446.7\n" + "    }\n"
+				+ "  }\n" + "  filter = <filter> <empty>\n"
+				+ "  operator = <uuid> DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\n"
+				+ "  parameter context ranking identifier = <uuid> Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\n"
+				+ "  pet = <uuid> <empty>\n" + "  stream identifier = <uuid> 0b9841a4-2093-11e9-007c-7e66ff7f0000\n"
+				+ "  stream message identifiers = {'CalculatedValues'}\n"
+				+ "  subscription type = <subscription type> SnapshotAndLive\n" + "  suppress reply = <boolean> false\n"
+				+ "  user identifier = <uuid> DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\n" + "}";
+		final String expected = "{\"messageType\":\"StreamOpenRequest\",\"protocolType\":\"CalculatedValuesProtocol\",\"calculated values request\":\"<calculated values request>\",\"type\":\"full\",\"filter\":null,\"operator\":\"DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\",\"parameter context ranking identifier\":\"Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\",\"pet\":null,\"stream identifier\":\"0b9841a4-2093-11e9-007c-7e66ff7f0000\",\"stream message identifiers\":[\"CalculatedValues\"],\"subscription type\":\"SnapshotAndLive\",\"suppress reply\":false,\"user identifier\":\"DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\",\"Columns\":[\"Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)\",\"Rho (36b677f4-2f5e-4baf-a57a-3dd93304499b)\",\"Yield (40009b86-2b19-11e1-933b-47deb3124dc8)\",\"Forward price (db1b9115-347c-4c4a-a796-9e493518f705)\",\"Delta (46acd072-d577-443e-a13f-1ea90b5c62e1)\",\"Gamma (8d2eb853-fb2f-4e11-9e75-64e414131951)\",\"Vega (775faa53-667f-4674-a875-66ab1f18b684)\",\"Theta (de75f175-d03f-11e3-bccb-3e99245e0d1c)\",\"Financing rate (35e24161-94c7-413c-9ca2-750b11875ee9)\",\"Fair market price (33efb879-baf3-4ce1-bec0-8600f21af8cd)\"],\"Rows\":[{\"rowId\":\"0b981bca-2093-11e9-b23a-4bc1bb59529c\",\"rowKey\":{\"rowKeyField\":\"ivid\",\"rowKeyValue\":{\"instrument\":\"f06153e4-9654-11e8-96b0-c53d96bb3220\"}}}],\"Overrides\":{\"rowId\":\"f06153e4-9654-11e8-96b0-c53d96bb3220\",\"instrument parameters\":{\"Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368)\":\"f06153e4-9654-11e8-96b0-c53d96bb3220\",\"Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e)\":1446.7,\"Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01)\":1446.7}}}";
+		testTraslateRule(source, expected, parser -> parser.message());
+	}
 
 	@Test
 	public void testMessageHeader() {
@@ -85,7 +164,13 @@ public class ProtocolLogJSONTranslatorTest {
 		testTraslateRule(source, expected, parser -> parser.messageHeader());
 	}
 
-	// TODO testObjectBody
+	@Test
+	public void testObjectBody() {
+		final String source = "{\n" + "  pet = <uuid> <empty>\n" + "  status = <status> Ok\n"
+				+ "  stream identifier = <uuid> ec6c636c-0398-11e9-0040-8155ff7f0000\n" + "}";
+		final String expected = "\"pet\":null,\"status\":\"Ok\",\"stream identifier\":\"ec6c636c-0398-11e9-0040-8155ff7f0000\"";
+		testTraslateRule(source, expected, parser -> parser.objectBody());
+	}
 
 	@Test
 	public void testProtocolType() {
@@ -352,7 +437,48 @@ public class ProtocolLogJSONTranslatorTest {
 		testTraslateRule(source, expected, parser -> parser.anyVector());
 	}
 
-	// TODO testMessageVector
+	@Test
+	public void testMessageVector() {
+		final String source = "<vector of message> [3]\n" + 
+				"  0 = <message> (201) GridViewFilterElement, <size> [74]\n" + 
+				"	  {\n" + 
+				"		grid view filter condition = <message> (202) GridViewFilterCondition, <size> [61]\n" + 
+				"		{\n" + 
+				"		  grid view field = <message> (30) GridViewField, <size> [41]\n" + 
+				"		  {\n" + 
+				"			grid view field value = <any> <integer> 1\n" + 
+				"			grid view property identifier = <uuid> State (ebd07201-bd28-4079-b526-e99b9287ca81)\n" + 
+				"		  }\n" + 
+				"		  grid view filter condition type = <grid view filter condition type> Equal\n" + 
+				"		}\n" + 
+				"	  }\n" + 
+				"  1 = <message> (201) GridViewFilterElement, <size> [74]\n" + 
+				"	  {\n" + 
+				"		grid view filter condition = <message> (202) GridViewFilterCondition, <size> [61]\n" + 
+				"		{\n" + 
+				"		  grid view field = <message> (30) GridViewField, <size> [41]\n" + 
+				"		  {\n" + 
+				"			grid view field value = <any> <integer> 1\n" + 
+				"			grid view property identifier = <uuid> Transaction state (32cba9f8-87dd-423d-94f4-f6080c457234)\n" + 
+				"		  }\n" + 
+				"		  grid view filter condition type = <grid view filter condition type> Equal\n" + 
+				"		}\n" + 
+				"	  }\n" + 
+				"  2 = <message> (201) GridViewFilterElement, <size> [74]\n" + 
+				"	  {\n" + 
+				"		grid view filter condition = <message> (202) GridViewFilterCondition, <size> [61]\n" + 
+				"		{\n" + 
+				"		  grid view field = <message> (30) GridViewField, <size> [41]\n" + 
+				"		  {\n" + 
+				"			grid view field value = <any> <integer> 2\n" + 
+				"			grid view property identifier = <uuid> Transaction operation (5fede20f-a105-406a-8fca-79b06afaacbd)\n" + 
+				"		  }\n" + 
+				"		  grid view filter condition type = <grid view filter condition type> Equal\n" + 
+				"		}\n" + 
+				"	  }";
+		final String expected = "[{\"messageType\":\"GridViewFilterElement\",\"grid view filter condition\":{\"messageType\":\"GridViewFilterCondition\",\"grid view field\":{\"messageType\":\"GridViewField\",\"grid view field value\":1,\"grid view property identifier\":\"State (ebd07201-bd28-4079-b526-e99b9287ca81)\"},\"grid view filter condition type\":\"Equal\"}},{\"messageType\":\"GridViewFilterElement\",\"grid view filter condition\":{\"messageType\":\"GridViewFilterCondition\",\"grid view field\":{\"messageType\":\"GridViewField\",\"grid view field value\":1,\"grid view property identifier\":\"Transaction state (32cba9f8-87dd-423d-94f4-f6080c457234)\"},\"grid view filter condition type\":\"Equal\"}},{\"messageType\":\"GridViewFilterElement\",\"grid view filter condition\":{\"messageType\":\"GridViewFilterCondition\",\"grid view field\":{\"messageType\":\"GridViewField\",\"grid view field value\":2,\"grid view property identifier\":\"Transaction operation (5fede20f-a105-406a-8fca-79b06afaacbd)\"},\"grid view filter condition type\":\"Equal\"}}]";
+		testTraslateRule(source, expected, parser -> parser.messageVector());
+	}
 
 	@Test
 	public void testColumnsRequest() {
