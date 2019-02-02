@@ -515,6 +515,35 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testParametersValue() {
+		final String source = "<parameters> [14] {\n" + 
+				"    Dividend instrument (2996f7af-b4f9-11df-b1f1-0836482d5ab0) = <uuid> f05664de-9654-11e8-96b0-c53d96bb3220\n" + 
+				"    Fair bid price adjustment (2164f3f8-4586-11e0-b3de-245e0d1c06b7) = <double> 0\n" + 
+				"    Fair ask price adjustment (94130584-4586-11e0-b3de-245e0d1c06b7) = <double> 0\n" + 
+				"    Fair bid volatility adjustment (bdab5f2c-4586-11e0-b3de-245e0d1c06b7) = <double> -0.01\n" + 
+				"    Fair ask volatility adjustment (c314a798-4586-11e0-b3de-245e0d1c06b7) = <double> 0.01\n" + 
+				"    Settlement days (5ae4e74a-280d-11e1-bb43-2923be84e16c) = <integer> 2\n" + 
+				"    Convenience yield (7c9cb3ec-2b12-11e1-933b-47deb3124dc8) = <double> 0\n" + 
+				"    Pricing model ranking (71ed8a32-fa82-11e2-b3de-245e0d1c06b7) = <uuid> tbrx0 Pricing Model (e62e5c6a-b502-11e8-8c87-ae529049f1f1)\n" + 
+				"    ZCYC override group (2dd8d4c0-cbed-11e5-9f25-870c3e99245e) = <uuid> EUR_EUR yield curve (d476ec7a-965e-11e8-9110-65008bc7fd23)\n" + 
+				"    Fair price multiplier (101a01cb-de39-11e6-8a89-0d1c06b747de) = <double> 1\n" + 
+				"    Final settlement days (556709ac-9497-11e7-993e-529049f1f1bb) = <integer> 2\n" + 
+				"    Underlying instrument (4727abae-6a17-42e0-9bc0-45425e005893) = <uuid> f05664de-9654-11e8-96b0-c53d96bb3220\n" + 
+				"    Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e) = <double> 11.109999999999999\n" + 
+				"    Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01) = <double> 1.1200000000000001\n" + 
+				"  }";
+		final String expected = "{\"Dividend instrument (2996f7af-b4f9-11df-b1f1-0836482d5ab0)\":\"f05664de-9654-11e8-96b0-c53d96bb3220\",\"Fair bid price adjustment (2164f3f8-4586-11e0-b3de-245e0d1c06b7)\":0,\"Fair ask price adjustment (94130584-4586-11e0-b3de-245e0d1c06b7)\":0,\"Fair bid volatility adjustment (bdab5f2c-4586-11e0-b3de-245e0d1c06b7)\":-0.01,\"Fair ask volatility adjustment (c314a798-4586-11e0-b3de-245e0d1c06b7)\":0.01,\"Settlement days (5ae4e74a-280d-11e1-bb43-2923be84e16c)\":2,\"Convenience yield (7c9cb3ec-2b12-11e1-933b-47deb3124dc8)\":0,\"Pricing model ranking (71ed8a32-fa82-11e2-b3de-245e0d1c06b7)\":\"tbrx0 Pricing Model (e62e5c6a-b502-11e8-8c87-ae529049f1f1)\",\"ZCYC override group (2dd8d4c0-cbed-11e5-9f25-870c3e99245e)\":\"EUR_EUR yield curve (d476ec7a-965e-11e8-9110-65008bc7fd23)\",\"Fair price multiplier (101a01cb-de39-11e6-8a89-0d1c06b747de)\":1,\"Final settlement days (556709ac-9497-11e7-993e-529049f1f1bb)\":2,\"Underlying instrument (4727abae-6a17-42e0-9bc0-45425e005893)\":\"f05664de-9654-11e8-96b0-c53d96bb3220\",\"Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e)\":11.109999999999999,\"Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01)\":1.1200000000000001}";
+		testTraslateRule(source, expected, parser -> parser.parametersValue());
+	}
+
+	@Test
+	public void testParametersValue_Empty() {
+		final String source = "<parameters> <empty>";
+		final String expected = "null";
+		testTraslateRule(source, expected, parser -> parser.parametersValue());
+	}
+
+	@Test
 	public void testColumnsRequest() {
 		final String source = "Columns [2] =\n"
 				+ "     [Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)]: UPDATE: {Underlying price (b320a884-d8e4-4a0a-9cec-d6ace19f04ee)\n"

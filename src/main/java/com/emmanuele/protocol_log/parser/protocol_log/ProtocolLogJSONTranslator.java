@@ -376,6 +376,16 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
+	public void exitParametersValue(ProtocolLogParser.ParametersValueContext ctx) {
+		String parametersValue = NULL_VALUE;
+		final ProtocolLogParser.ObjectBodyContext objectBody = ctx.objectBody();
+		if (objectBody != null) {
+			parametersValue = addBraces(getJSON(objectBody));
+		}
+		setJSON(ctx, parametersValue);
+	}
+
+	@Override
 	public void exitColumnsRequest(ProtocolLogParser.ColumnsRequestContext ctx) {
 		final StringBuilder buf = new StringBuilder();
 		for (final ParseTree child : ctx.children) {
