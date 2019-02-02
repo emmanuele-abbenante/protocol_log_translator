@@ -544,18 +544,6 @@ public class ProtocolLogBaseListener implements ProtocolLogListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTable(ProtocolLogParser.TableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTable(ProtocolLogParser.TableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterRow(ProtocolLogParser.RowContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -481,6 +481,28 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
+	public void exitTableValue(ProtocolLogParser.TableValueContext ctx) {
+		translateVector(ctx, ctx.row());
+	}
+
+	@Override
+	public void exitRow(ProtocolLogParser.RowContext ctx) {
+		final StringBuilder buf = new StringBuilder();
+		buf.append(buildPair(addQuotes("rowId"), ctx.rowId())).append(",");
+
+		final StringBuilder columns = new StringBuilder();
+		for (ProtocolLogParser.ColumnContext column : ctx.column()) {
+			columns.append(getJSON(column)).append(",");
+		}
+		if (columns.length() > 0) {
+			columns.deleteCharAt(columns.length() - 1);
+		}
+		buf.append(buildPair(addQuotes("columns"), addSquareBrackets(columns.toString())));
+
+		setJSON(ctx, addBraces(buf.toString()));
+	}
+
+	@Override
 	public void exitColumn(ProtocolLogParser.ColumnContext ctx) {
 		final StringBuilder buf = new StringBuilder();
 		buf.append(buildPair(addQuotes("column"), ctx.uuidValue()));

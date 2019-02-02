@@ -100,6 +100,8 @@ messageHeader
 	)? ',' '<size>' '[' INTEGER ']' NL
 ;
 
+//TODO check if rules "columnsRequest", "rowRequestsList", "overrides" and "parametersRequest" can be unified
+
 objectBody
 :
 	'{' NL
@@ -113,6 +115,8 @@ objectBody
 		) NL
 	)* '}'
 ;
+
+//TODO check if any rule containing = can use rule "pair"
 
 pair
 :
@@ -307,6 +311,8 @@ errorValue
 	'<error double>' QUOTED_STRING
 ;
 
+//TODO check if vector rules can be unified
+
 vectorValue
 :
 	uuidVector
@@ -370,11 +376,7 @@ messageVector
 
 tableValue
 :
-	'<table values>' '[' INTEGER ']' table
-;
-
-table
-:
+	'<table values>' '[' INTEGER ']'
 	(
 		NL row
 	)*

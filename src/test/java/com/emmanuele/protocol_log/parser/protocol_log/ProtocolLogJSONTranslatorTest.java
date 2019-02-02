@@ -215,6 +215,28 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testTableValue() {
+		final String source = "<table values> [2]\n" + 
+				"[54b136cc-2091-11e9-bd60-e7ffa3dffd67]:\n" + 
+				"          [Overnight financing factor (94c11267-2b0a-11e1-933b-47deb3124dc8)] = <double> -1.0555664200051496e-05\n" + 
+				"          [Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)] = <double> 1\n" + 
+				"[54b3fb50-2091-11e9-bd60-e7ffa3dffd67]:\n" + 
+				"          [Overnight financing factor (94c11267-2b0a-11e1-933b-47deb3124dc8)] = <double> -1.0555664200051496e-05\n" + 
+				"          [Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)] = <double> 1";
+		final String expected = "[{\"rowId\":\"54b136cc-2091-11e9-bd60-e7ffa3dffd67\",\"columns\":[{\"column\":\"Overnight financing factor (94c11267-2b0a-11e1-933b-47deb3124dc8)\",\"value\":-1.0555664200051496e-05},{\"column\":\"Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)\",\"value\":1}]},{\"rowId\":\"54b3fb50-2091-11e9-bd60-e7ffa3dffd67\",\"columns\":[{\"column\":\"Overnight financing factor (94c11267-2b0a-11e1-933b-47deb3124dc8)\",\"value\":-1.0555664200051496e-05},{\"column\":\"Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)\",\"value\":1}]}]";
+		testTraslateRule(source, expected, parser -> parser.tableValue());
+	}
+
+	@Test
+	public void testRow() {
+		final String source = "[54b136cc-2091-11e9-bd60-e7ffa3dffd67]:\n" + 
+				"          [Overnight financing factor (94c11267-2b0a-11e1-933b-47deb3124dc8)] = <double> -1.0555664200051496e-05\n" + 
+				"          [Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)] = <double> 1";
+		final String expected = "{\"rowId\":\"54b136cc-2091-11e9-bd60-e7ffa3dffd67\",\"columns\":[{\"column\":\"Overnight financing factor (94c11267-2b0a-11e1-933b-47deb3124dc8)\",\"value\":-1.0555664200051496e-05},{\"column\":\"Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)\",\"value\":1}]}";
+		testTraslateRule(source, expected, parser -> parser.row());
+	}
+
+	@Test
 	public void testColumn() {
 		final String source = "[Delta (46acd072-d577-443e-a13f-1ea90b5c62e1)] = <error double> \"Instrument definitions not received\"";
 		final String expected = "{\"column\":\"Delta (46acd072-d577-443e-a13f-1ea90b5c62e1)\",\"value\":\"Instrument definitions not received\"}";
