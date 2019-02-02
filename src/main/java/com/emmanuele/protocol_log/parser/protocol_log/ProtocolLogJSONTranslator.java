@@ -80,7 +80,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 
 	@Override
 	public void exitLocalComponent(ProtocolLogParser.LocalComponentContext ctx) {
-		setJSON(ctx, buildPair(addQuotes("localComponent"), addBraces(getJSON(ctx.component()))));
+		setJSON(ctx, buildPair(addQuotes("localComponent"), getJSON(ctx.component())));
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 			buf.append(",");
 			buf.append(getJSON(ctx.systemName()));
 		}
-		setJSON(ctx, buf.toString());
+		setJSON(ctx, addBraces(buf.toString()));
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 
 	@Override
 	public void exitRemoteComponent(ProtocolLogParser.RemoteComponentContext ctx) {
-		setJSON(ctx, buildPair(addQuotes("remoteComponent"), addBraces(getJSON(ctx.component()))));
+		setJSON(ctx, buildPair(addQuotes("remoteComponent"), getJSON(ctx.component())));
 	}
 
 	// MESSAGE

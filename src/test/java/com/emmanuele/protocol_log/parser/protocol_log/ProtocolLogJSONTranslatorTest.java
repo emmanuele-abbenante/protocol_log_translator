@@ -9,6 +9,17 @@ import org.junit.Test;
 
 public class ProtocolLogJSONTranslatorTest {
 
+	// TODO testFile
+
+	// TODO testLogEntry
+
+	@Test
+	public void testHeader() {
+		final String source = "2018-12-19 15:18:14.798058 CET tbrx0apcm01vs tb_test_ae2@tb_test/tb_test_ae2[54429:55007] protocol.out <debug> src/common.cpp(98): Send StreamOpenRequest to tb_test_ce2-ce@tb_test [local 10.240.217.16:50001]";
+		final String expected = "\"timestamp\":\"2018-12-19 15:18:14.798058 CET\",\"host\":\"tbrx0apcm01vs\",\"localComponent\":{\"component\":\"tb_test_ae2\",\"system\":\"tb_test\"},\"direction\":\"out\",\"remoteComponent\":{\"component\":\"tb_test_ce2-ce\",\"system\":\"tb_test\"}";
+		testTraslateRule(source, expected, parser -> parser.header());
+	}
+
 	@Test
 	public void testHost() {
 		final String source = "tbrx0apcm01vs";
@@ -17,10 +28,38 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testComponent() {
+		final String source = "tb_test_ae2@tb_test/tb_test_ae2";
+		final String expected = "{\"component\":\"tb_test_ae2\",\"system\":\"tb_test\"}";
+		testTraslateRule(source, expected, parser -> parser.component());
+	}
+
+	@Test
+	public void testComponentName() {
+		final String source = "tb_test_ae2";
+		final String expected = "\"component\":\"tb_test_ae2\"";
+		testTraslateRule(source, expected, parser -> parser.componentName());
+	}
+
+	@Test
 	public void testSystemName() {
 		final String source = "tb_test";
 		final String expected = "\"system\":\"tb_test\"";
 		testTraslateRule(source, expected, parser -> parser.systemName());
+	}
+
+	@Test
+	public void testLocalComponent() {
+		final String source = "tb_test_ae2@tb_test/tb_test_ae2";
+		final String expected = "\"localComponent\":{\"component\":\"tb_test_ae2\",\"system\":\"tb_test\"}";
+		testTraslateRule(source, expected, parser -> parser.localComponent());
+	}
+
+	@Test
+	public void testRemoteComponent() {
+		final String source = "tb_test_ae2@tb_test/tb_test_ae2";
+		final String expected = "\"remoteComponent\":{\"component\":\"tb_test_ae2\",\"system\":\"tb_test\"}";
+		testTraslateRule(source, expected, parser -> parser.remoteComponent());
 	}
 
 	@Test
@@ -37,6 +76,17 @@ public class ProtocolLogJSONTranslatorTest {
 		testTraslateRule(source, expected, parser -> parser.messageType());
 	}
 
+	// TODO testMessage
+
+	@Test
+	public void testMessageHeader() {
+		final String source = "<message> (138) StreamOpenRequest, <protocol> (63) CalculatedValuesProtocol, <size> [401]\n";
+		final String expected = "\"messageType\":\"StreamOpenRequest\",\"protocolType\":\"CalculatedValuesProtocol\"";
+		testTraslateRule(source, expected, parser -> parser.messageHeader());
+	}
+
+	// TODO testObjectBody
+
 	@Test
 	public void testProtocolType() {
 		final String source = "MarketDataProtocol";
@@ -45,35 +95,35 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
-	public void testComponentNameString() {
+	public void testComponent_NameString() {
 		final String source = "tb_test_ce2";
 		final String expected = "\"component\":\"tb_test_ce2\"";
 		testTraslateRule(source, expected, parser -> parser.componentName());
 	}
 
 	@Test
-	public void testComponentNameDashedString() {
+	public void testComponentName_DashedString() {
 		final String source = "tb_test_ce2-ce";
 		final String expected = "\"component\":\"tb_test_ce2-ce\"";
 		testTraslateRule(source, expected, parser -> parser.componentName());
 	}
 
 	@Test
-	public void testPairKeyAsString() {
+	public void testPair_KeyAsString() {
 		final String source = "stream item identifier = <uuid> 5cb0999e-2064-11e9-9750-6de498ccf87f";
 		final String expected = "\"stream item identifier\":\"5cb0999e-2064-11e9-9750-6de498ccf87f\"";
 		testTraslateRule(source, expected, parser -> parser.pair());
 	}
 
 	@Test
-	public void testPairKeyAsNamedUuid() {
+	public void testPair_KeyAsNamedUuid() {
 		final String source = "Currency (82583bd9-4465-4ac6-83aa-ab76a6b8da9a) = <empty>";
 		final String expected = "\"Currency (82583bd9-4465-4ac6-83aa-ab76a6b8da9a)\":null";
 		testTraslateRule(source, expected, parser -> parser.pair());
 	}
 
 	@Test
-	public void testPairKeyAsUuid() {
+	public void testPair_KeyAsUuid() {
 		final String source = "fc44f1dd-aeb7-11e7-993e-529049f1f1bb = <string> \"Manual\"";
 		final String expected = "\"fc44f1dd-aeb7-11e7-993e-529049f1f1bb\":\"Manual\"";
 		testTraslateRule(source, expected, parser -> parser.pair());
@@ -87,24 +137,38 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
-	public void testValueStatus() {
+	public void testFieldKey() {
+		final String source = "instrument parameters";
+		final String expected = "\"instrument parameters\"";
+		testTraslateRule(source, expected, parser -> parser.fieldKey());
+	}
+
+	@Test
+	public void testValue_Status() {
 		final String source = "<status> Ok";
 		final String expected = "\"Ok\"";
 		testTraslateRule(source, expected, parser -> parser.value());
 	}
 
 	@Test
-	public void testValueInteger() {
+	public void testValue_Integer() {
 		final String source = "<integer> 3";
 		final String expected = "3";
 		testTraslateRule(source, expected, parser -> parser.value());
 	}
 
 	@Test
-	public void testValueUuid() {
+	public void testValue_Uuid() {
 		final String source = "<uuid> 54b148ce-2091-11e9-bd60-e7ffa3dffd67";
 		final String expected = "\"54b148ce-2091-11e9-bd60-e7ffa3dffd67\"";
 		testTraslateRule(source, expected, parser -> parser.value());
+	}
+
+	@Test
+	public void testAnyValue_Integer() {
+		final String source = "<any> <integer> 2";
+		final String expected = "2";
+		testTraslateRule(source, expected, parser -> parser.anyValue());
 	}
 
 	@Test
@@ -143,6 +207,13 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testNamedUuid() {
+		final String source = "Host modified datetime (434d98ff-23b7-4489-81a0-188fedf4728a)";
+		final String expected = "\"Host modified datetime (434d98ff-23b7-4489-81a0-188fedf4728a)\"";
+		testTraslateRule(source, expected, parser -> parser.namedUuid());
+	}
+
+	@Test
 	public void testEnumTypedValue_Trend() {
 		final String source = "<trend> Minus";
 		final String expected = "\"Minus\"";
@@ -171,6 +242,27 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testDatetimeValue() {
+		final String source = "<datetime> 2019-01-03 22:45:15.293281 CET";
+		final String expected = "\"2019-01-03 22:45:15.293281 CET\"";
+		testTraslateRule(source, expected, parser -> parser.datetimeValue());
+	}
+
+	@Test
+	public void testTimestampValue() {
+		final String source = "2019-01-03 22:45:15.293281 CET";
+		final String expected = "\"2019-01-03 22:45:15.293281 CET\"";
+		testTraslateRule(source, expected, parser -> parser.timestampValue());
+	}
+
+	@Test
+	public void testStreamMessageIdentifiersValue() {
+		final String source = "{'Trade'}";
+		final String expected = "[\"Trade\"]";
+		testTraslateRule(source, expected, parser -> parser.streamMessageIdentifiersValue());
+	}
+
+	@Test
 	public void testStringValue() {
 		final String source = "<string> \"Extraction at time 22:05:00 completed\"";
 		final String expected = "\"Extraction at time 22:05:00 completed\"";
@@ -190,6 +282,8 @@ public class ProtocolLogJSONTranslatorTest {
 		final String expected = "34";
 		testTraslateRule(source, expected, parser -> parser.doubleValue());
 	}
+
+	// TODO testFilterValue
 
 	@Test
 	public void testBooleanValue() {
@@ -257,6 +351,8 @@ public class ProtocolLogJSONTranslatorTest {
 		final String expected = "[1,\"2019-01-03 22:45:16.841148 CET\",481,\"Extraction at time 22:45:15 completed\"]";
 		testTraslateRule(source, expected, parser -> parser.anyVector());
 	}
+
+	// TODO testMessageVector
 
 	@Test
 	public void testColumnsRequest() {
