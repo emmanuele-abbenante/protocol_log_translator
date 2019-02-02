@@ -433,11 +433,7 @@ rowRequestsList
 :
 	'Rows' '[' INTEGER ']' '='
 	(
-		NL
-		(
-			rowRequest
-			| rowRequestWithParams
-		)
+		NL rowRequest
 	)*
 ;
 
@@ -448,13 +444,11 @@ parametersRequest
 
 rowRequest
 :
-	'[' rowId ']' ':' 'UPDATE' ':' rowRequestKey
-;
-
-rowRequestWithParams
-:
-	'[' rowId ']' ':' 'UPDATE' ':' '{' NL? rowRequestKey NL? STRING '=' '['
-	INTEGER ']' objectBody NL? '}'
+	'[' rowId ']' ':' 'UPDATE' ':'
+	(
+		rowRequestKey
+		| '{' NL? rowRequestKey NL? STRING '=' '[' INTEGER ']' objectBody NL? '}'
+	)
 ;
 
 rowRequestKey

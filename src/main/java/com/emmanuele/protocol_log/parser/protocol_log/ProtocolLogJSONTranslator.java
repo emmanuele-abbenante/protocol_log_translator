@@ -421,10 +421,15 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	@Override
 	public void exitRowRequest(ProtocolLogParser.RowRequestContext ctx) {
 		final StringBuilder buf = new StringBuilder();
-		final String rowIdPair = buildPair(addQuotes("rowId"), ctx.rowId());
-		buf.append(rowIdPair).append(",");
-		final String rowKeyPair = buildPair(addQuotes("rowKey"), ctx.rowRequestKey());
-		buf.append(rowKeyPair);
+		final String rowId = getJSON(ctx.rowId());
+		final StringBuilder rowRequestKey = new StringBuilder();
+		rowRequestKey.append(getJSON(ctx.rowRequestKey()));
+		final ProtocolLogParser.ObjectBodyContext objectBody = ctx.objectBody();
+		if (objectBody != null) {
+			rowRequestKey.append(",")
+					.append(buildPair(addQuotes(ctx.STRING().getText()), addBraces(getJSON(objectBody))));
+		}
+		buf.append(buildPair(rowId, addBraces(rowRequestKey.toString())));
 		setJSON(ctx, addBraces(buf.toString()));
 	}
 
@@ -435,12 +440,7 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 
 	@Override
 	public void exitRowRequestKey(ProtocolLogParser.RowRequestKeyContext ctx) {
-		final StringBuilder buf = new StringBuilder();
-		final String fieldKey = getJSON(ctx.fieldKey());
-		buf.append(buildPair(addQuotes("rowKeyField"), fieldKey));
-		buf.append(",");
-		buf.append(buildPair(addQuotes("rowKeyValue"), ctx.rowKeyValue()));
-		setJSON(ctx, addBraces(buf.toString()));
+		setJSON(ctx, buildPair(ctx.fieldKey(), ctx.rowKeyValue()));
 	}
 
 	@Override
@@ -481,6 +481,16 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
+	public void exitViidValue(ProtocolLogParser.ViidValueContext ctx) {
+		final StringBuilder buf = new StringBuilder();
+		for (ProtocolLogParser.PairContext pair : ctx.pair()) {
+			buf.append(getJSON(pair)).append(",");
+		}
+		buf.append(buildPair(addQuotes("mic"), addQuotes(ctx.STRING().getText())));
+		setJSON(ctx, addBraces(buf.toString()));
+	}
+
+	@Override
 	public void exitTableValue(ProtocolLogParser.TableValueContext ctx) {
 		translateVector(ctx, ctx.row());
 	}
@@ -517,8 +527,12 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 		return String.format(PAIR_PATTERN, key, value);
 	}
 
-	private String buildPair(final String key, final ParseTree ctx) {
-		return String.format(PAIR_PATTERN, key, getJSON(ctx));
+	private String buildPair(final String key, final ParseTree value) {
+		return String.format(PAIR_PATTERN, key, getJSON(value));
+	}
+
+	private String buildPair(final ParseTree key, final ParseTree value) {
+		return String.format(PAIR_PATTERN, getJSON(key), getJSON(value));
 	}
 
 	private String addQuotes(final String string) {

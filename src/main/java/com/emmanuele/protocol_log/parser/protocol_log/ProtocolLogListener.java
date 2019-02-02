@@ -538,16 +538,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitRowRequest(ProtocolLogParser.RowRequestContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#rowRequestWithParams}.
-	 * @param ctx the parse tree
-	 */
-	void enterRowRequestWithParams(ProtocolLogParser.RowRequestWithParamsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#rowRequestWithParams}.
-	 * @param ctx the parse tree
-	 */
-	void exitRowRequestWithParams(ProtocolLogParser.RowRequestWithParamsContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#rowRequestKey}.
 	 * @param ctx the parse tree
 	 */

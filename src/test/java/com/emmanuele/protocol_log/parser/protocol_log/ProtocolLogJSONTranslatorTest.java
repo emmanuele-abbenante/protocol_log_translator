@@ -118,7 +118,8 @@ public class ProtocolLogJSONTranslatorTest {
 	@Test
 	public void testMessage() {
 		final String source = "<message> (138) StreamOpenRequest, <protocol> (63) CalculatedValuesProtocol, <size> [785]\n"
-				+ "{\n" + "  calculated values request = <calculated values request> \n" + "  type = full\n"
+				+ "{\n"
+				+ "  calculated values request = <calculated values request> \n" + "  type = full\n"
 				+ "  Columns [11] =\n"
 				+ "     [Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)]: UPDATE: {Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)\n"
 				+ "  }\n"
@@ -139,21 +140,25 @@ public class ProtocolLogJSONTranslatorTest {
 				+ "     [Financing rate (35e24161-94c7-413c-9ca2-750b11875ee9)]: UPDATE: {Financing rate (35e24161-94c7-413c-9ca2-750b11875ee9)\n"
 				+ "  }\n"
 				+ "     [Fair market price (33efb879-baf3-4ce1-bec0-8600f21af8cd)]: UPDATE: {Fair market price (33efb879-baf3-4ce1-bec0-8600f21af8cd)\n"
-				+ "  }\n" + "  Rows [1] =\n"
+				+ "  }\n"
+				+ "  Rows [1] =\n"
 				+ "     [0b981bca-2093-11e9-b23a-4bc1bb59529c]: UPDATE: ivid:{instrument:f06153e4-9654-11e8-96b0-c53d96bb3220}\n"
-				+ "  Overrides [1] =\n" + "     [f06153e4-9654-11e8-96b0-c53d96bb3220]: UPDATE: {\n"
+				+ "  Overrides [1] =\n"
+				+ "     [f06153e4-9654-11e8-96b0-c53d96bb3220]: UPDATE: {\n"
 				+ "    instrument parameters = [3] {\n"
 				+ "      Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368) = <uuid> f06153e4-9654-11e8-96b0-c53d96bb3220\n"
 				+ "      Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e) = <double> 1446.7\n"
 				+ "      Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01) = <double> 1446.7\n" + "    }\n"
-				+ "  }\n" + "  filter = <filter> <empty>\n"
+				+ "  }\n"
+				+ "  filter = <filter> <empty>\n"
 				+ "  operator = <uuid> DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\n"
 				+ "  parameter context ranking identifier = <uuid> Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\n"
-				+ "  pet = <uuid> <empty>\n" + "  stream identifier = <uuid> 0b9841a4-2093-11e9-007c-7e66ff7f0000\n"
+				+ "  pet = <uuid> <empty>\n"
+				+ "  stream identifier = <uuid> 0b9841a4-2093-11e9-007c-7e66ff7f0000\n"
 				+ "  stream message identifiers = {'CalculatedValues'}\n"
 				+ "  subscription type = <subscription type> SnapshotAndLive\n" + "  suppress reply = <boolean> false\n"
 				+ "  user identifier = <uuid> DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\n" + "}";
-		final String expected = "{\"messageType\":\"StreamOpenRequest\",\"protocolType\":\"CalculatedValuesProtocol\",\"calculated values request\":\"<calculated values request>\",\"type\":\"full\",\"filter\":null,\"operator\":\"DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\",\"parameter context ranking identifier\":\"Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\",\"pet\":null,\"stream identifier\":\"0b9841a4-2093-11e9-007c-7e66ff7f0000\",\"stream message identifiers\":[\"CalculatedValues\"],\"subscription type\":\"SnapshotAndLive\",\"suppress reply\":false,\"user identifier\":\"DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\",\"Columns\":[\"Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)\",\"Rho (36b677f4-2f5e-4baf-a57a-3dd93304499b)\",\"Yield (40009b86-2b19-11e1-933b-47deb3124dc8)\",\"Forward price (db1b9115-347c-4c4a-a796-9e493518f705)\",\"Delta (46acd072-d577-443e-a13f-1ea90b5c62e1)\",\"Gamma (8d2eb853-fb2f-4e11-9e75-64e414131951)\",\"Vega (775faa53-667f-4674-a875-66ab1f18b684)\",\"Theta (de75f175-d03f-11e3-bccb-3e99245e0d1c)\",\"Financing rate (35e24161-94c7-413c-9ca2-750b11875ee9)\",\"Fair market price (33efb879-baf3-4ce1-bec0-8600f21af8cd)\"],\"Rows\":[{\"rowId\":\"0b981bca-2093-11e9-b23a-4bc1bb59529c\",\"rowKey\":{\"rowKeyField\":\"ivid\",\"rowKeyValue\":{\"instrument\":\"f06153e4-9654-11e8-96b0-c53d96bb3220\"}}}],\"Overrides\":{\"rowId\":\"f06153e4-9654-11e8-96b0-c53d96bb3220\",\"instrument parameters\":{\"Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368)\":\"f06153e4-9654-11e8-96b0-c53d96bb3220\",\"Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e)\":1446.7,\"Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01)\":1446.7}}}";
+		final String expected = "{\"messageType\":\"StreamOpenRequest\",\"protocolType\":\"CalculatedValuesProtocol\",\"calculated values request\":\"<calculated values request>\",\"type\":\"full\",\"filter\":null,\"operator\":\"DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\",\"parameter context ranking identifier\":\"Risk (586cf076-32d2-11e1-9cc9-eda4fff76405)\",\"pet\":null,\"stream identifier\":\"0b9841a4-2093-11e9-007c-7e66ff7f0000\",\"stream message identifiers\":[\"CalculatedValues\"],\"subscription type\":\"SnapshotAndLive\",\"suppress reply\":false,\"user identifier\":\"DataEnricher (f391c898-328e-11e8-831f-a6db3c870c3e)\",\"Columns\":[\"Present value adjustment factor (80edca0e-3c32-11e1-bccb-99245e0d1c06)\",\"Rho (36b677f4-2f5e-4baf-a57a-3dd93304499b)\",\"Yield (40009b86-2b19-11e1-933b-47deb3124dc8)\",\"Forward price (db1b9115-347c-4c4a-a796-9e493518f705)\",\"Delta (46acd072-d577-443e-a13f-1ea90b5c62e1)\",\"Gamma (8d2eb853-fb2f-4e11-9e75-64e414131951)\",\"Vega (775faa53-667f-4674-a875-66ab1f18b684)\",\"Theta (de75f175-d03f-11e3-bccb-3e99245e0d1c)\",\"Financing rate (35e24161-94c7-413c-9ca2-750b11875ee9)\",\"Fair market price (33efb879-baf3-4ce1-bec0-8600f21af8cd)\"],\"Rows\":[{\"0b981bca-2093-11e9-b23a-4bc1bb59529c\":{\"ivid\":{\"instrument\":\"f06153e4-9654-11e8-96b0-c53d96bb3220\"}}}],\"Overrides\":{\"rowId\":\"f06153e4-9654-11e8-96b0-c53d96bb3220\",\"instrument parameters\":{\"Instrument (4862f28d-10ab-46f1-93c5-4c97e2048368)\":\"f06153e4-9654-11e8-96b0-c53d96bb3220\",\"Bid override price (88cf4d04-9f33-4e20-97e5-359cb9c1d66e)\":1446.7,\"Ask override price (8c2e857b-3146-4eb7-9862-d85466993f01)\":1446.7}}}";
 		testTraslateRule(source, expected, parser -> parser.message());
 	}
 
@@ -212,6 +217,13 @@ public class ProtocolLogJSONTranslatorTest {
 		final String source = "fc44f1dd-aeb7-11e7-993e-529049f1f1bb = <string> \"Manual\"";
 		final String expected = "\"fc44f1dd-aeb7-11e7-993e-529049f1f1bb\":\"Manual\"";
 		testTraslateRule(source, expected, parser -> parser.pair());
+	}
+
+	@Test
+	public void testViidValue() {
+		final String source = "<viid> venue=Xetra T7 (7670ae32-46b3-11e7-a020-bedec25e9b91);instrumentid=485026;instrumenttype=1;nolegs=0;productid=20054;volumefactor=1{XETR}";
+		final String expected = "{\"venue\":\"Xetra T7 (7670ae32-46b3-11e7-a020-bedec25e9b91)\",\"instrumentid\":485026,\"instrumenttype\":1,\"nolegs\":0,\"productid\":20054,\"volumefactor\":1,\"mic\":\"XETR\"}";
+		testTraslateRule(source, expected, parser -> parser.viidValue());
 	}
 
 	@Test
@@ -537,14 +549,26 @@ public class ProtocolLogJSONTranslatorTest {
 		final String source = "Rows [10] =\n"
 				+ "    [0c909246-2093-11e9-bd60-e7ffa3dffd67]: UPDATE: ivid:{instrument:f8b279be-9655-11e8-96b0-c53d96bb3220}\n"
 				+ "    [0c90f48e-2093-11e9-bd60-e7ffa3dffd67]: UPDATE: ivid:{instrument:7b983838-e439-11e8-abb0-d32a28bad6d5}";
-		final String expected = "\"Rows\":[{\"rowId\":\"0c909246-2093-11e9-bd60-e7ffa3dffd67\",\"rowKey\":{\"rowKeyField\":\"ivid\",\"rowKeyValue\":{\"instrument\":\"f8b279be-9655-11e8-96b0-c53d96bb3220\"}}},{\"rowId\":\"0c90f48e-2093-11e9-bd60-e7ffa3dffd67\",\"rowKey\":{\"rowKeyField\":\"ivid\",\"rowKeyValue\":{\"instrument\":\"7b983838-e439-11e8-abb0-d32a28bad6d5\"}}}]";
+		final String expected = "\"Rows\":[{\"0c909246-2093-11e9-bd60-e7ffa3dffd67\":{\"ivid\":{\"instrument\":\"f8b279be-9655-11e8-96b0-c53d96bb3220\"}}},{\"0c90f48e-2093-11e9-bd60-e7ffa3dffd67\":{\"ivid\":{\"instrument\":\"7b983838-e439-11e8-abb0-d32a28bad6d5\"}}}]";
 		testTraslateRule(source, expected, parser -> parser.rowRequestsList());
 	}
 
 	@Test
 	public void testRowRequest() {
 		final String source = "[ec6c3f72-0398-11e9-3a85-8d362a43669d]: UPDATE: ivid:{instrument:2e79bd1a-b73e-11e8-a320-76ea49461d8a}";
-		final String expected = "{\"rowId\":\"ec6c3f72-0398-11e9-3a85-8d362a43669d\",\"rowKey\":{\"rowKeyField\":\"ivid\",\"rowKeyValue\":{\"instrument\":\"2e79bd1a-b73e-11e8-a320-76ea49461d8a\"}}}";
+		final String expected = "{\"ec6c3f72-0398-11e9-3a85-8d362a43669d\":{\"ivid\":{\"instrument\":\"2e79bd1a-b73e-11e8-a320-76ea49461d8a\"}}}";
+		testTraslateRule(source, expected, parser -> parser.rowRequest());
+	}
+
+	@Test
+	public void testRowRequest_WithParams() {
+		final String source = "[0c909246-2093-11e9-bd60-e7ffa3dffd67]: UPDATE: {\n" + 
+				"    ivid:{instrument:f8b279be-9655-11e8-96b0-c53d96bb3220}\n" + 
+				"    parameters = [1] {\n" + 
+				"      Parameter portfolio (658cf8b8-0329-11e3-b706-ae529049f1f1) = <uuid> 81a31e5a-1413-11e9-8d13-5e0d1c06b747\n" + 
+				"    }\n" + 
+				"  }";
+		final String expected = "{\"0c909246-2093-11e9-bd60-e7ffa3dffd67\":{\"ivid\":{\"instrument\":\"f8b279be-9655-11e8-96b0-c53d96bb3220\"},\"parameters\":{\"Parameter portfolio (658cf8b8-0329-11e3-b706-ae529049f1f1)\":\"81a31e5a-1413-11e9-8d13-5e0d1c06b747\"}}}";
 		testTraslateRule(source, expected, parser -> parser.rowRequest());
 	}
 
@@ -568,7 +592,7 @@ public class ProtocolLogJSONTranslatorTest {
 	@Test
 	public void testRowRequestKey() {
 		final String source = "ivid:{instrument:f044a41a-9654-11e8-96b0-c53d96bb3220;venue:0b97a38e-2093-11e9-004f-8b62ff7f0000}";
-		final String expected = "{\"rowKeyField\":\"ivid\",\"rowKeyValue\":{\"instrument\":\"f044a41a-9654-11e8-96b0-c53d96bb3220\",\"venue\":\"0b97a38e-2093-11e9-004f-8b62ff7f0000\"}}";
+		final String expected = "\"ivid\":{\"instrument\":\"f044a41a-9654-11e8-96b0-c53d96bb3220\",\"venue\":\"0b97a38e-2093-11e9-004f-8b62ff7f0000\"}";
 		testTraslateRule(source, expected, parser -> parser.rowRequestKey());
 	}
 
