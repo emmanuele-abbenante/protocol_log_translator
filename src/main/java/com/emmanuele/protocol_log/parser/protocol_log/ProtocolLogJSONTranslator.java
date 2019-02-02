@@ -416,6 +416,11 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	}
 
 	@Override
+	public void exitParametersRequest(ProtocolLogParser.ParametersRequestContext ctx) {
+		setJSON(ctx, buildPair(addQuotes("Parameters"), addBraces(getJSON(ctx.objectBody()))));
+	}
+
+	@Override
 	public void exitRowRequestsList(ProtocolLogParser.RowRequestsListContext ctx) {
 		final StringBuilder buf = new StringBuilder();
 		final List<ProtocolLogParser.RowRequestContext> rowRequests = ctx.rowRequest();

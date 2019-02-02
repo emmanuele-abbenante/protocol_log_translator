@@ -574,6 +574,15 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testParametersRequest() {
+		final String source = "Parameters = [1] {\n" + 
+				"    Parameter context ranking (68aa0456-b6eb-11e1-9b1c-06b747deb312) = <uuid> Global (5e325302-32d2-11e1-be6e-e748d6d66bf3)\n" + 
+				"  }";
+		final String expected = "\"Parameters\":{\"Parameter context ranking (68aa0456-b6eb-11e1-9b1c-06b747deb312)\":\"Global (5e325302-32d2-11e1-be6e-e748d6d66bf3)\"}";
+		testTraslateRule(source, expected, parser -> parser.parametersRequest());
+	}
+
+	@Test
 	public void testRowRequestsList() {
 		final String source = "Rows [10] =\n"
 				+ "    [0c909246-2093-11e9-bd60-e7ffa3dffd67]: UPDATE: ivid:{instrument:f8b279be-9655-11e8-96b0-c53d96bb3220}\n"
