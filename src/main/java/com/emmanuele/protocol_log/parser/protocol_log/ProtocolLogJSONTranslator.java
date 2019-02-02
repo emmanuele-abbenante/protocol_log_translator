@@ -295,10 +295,29 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	public void exitFilterValue(ProtocolLogParser.FilterValueContext ctx) {
 		final ParserRuleContext condition = ctx.condition();
 		if (condition != null) {
-			setJSON(ctx, addQuotes(condition.getText()));
+			setJSON(ctx, getJSON(condition));
 		} else {
 			setJSON(ctx, NULL_VALUE);
 		}
+	}
+
+	@Override
+	public void exitCondition(ProtocolLogParser.ConditionContext ctx) {
+		final StringBuilder buf = new StringBuilder();
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+			if (ctx.getChild(i) instanceof TerminalNode) {
+				final String token = ((TerminalNode) ctx.getChild(i)).getText();
+				if (!"'".equals(token)) {
+					buf.append(token).append(" ");
+				}
+			} else {
+				buf.append(getJSON(ctx.getChild(i))).append(" ");
+			}
+		}
+		if (buf.length() > 0) {
+			buf.deleteCharAt(buf.length() - 1);
+		}
+		setJSON(ctx, buf.toString());
 	}
 
 	@Override

@@ -574,6 +574,27 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
+	public void testFilter() {
+		final String source = "<filter> (('host created datetime'>=2019-01-03 00:00:00.000000 CET && 'host created datetime'<=2019-01-03 22:45:15.292000 CET) || ('host modified datetime'>=2019-01-03 00:00:00.000000 CET && 'host modified datetime'<=2019-01-03 22:45:15.292000 CET))";
+		final String expected = "( ( \"host created datetime\" >= \"2019-01-03 00:00:00.000000 CET\" && \"host created datetime\" <= \"2019-01-03 22:45:15.292000 CET\" ) || ( \"host modified datetime\" >= \"2019-01-03 00:00:00.000000 CET\" && \"host modified datetime\" <= \"2019-01-03 22:45:15.292000 CET\" ) )";
+		testTraslateRule(source, expected, parser -> parser.filterValue());
+	}
+
+	@Test
+	public void testFilter_Empty() {
+		final String source = "<filter> <empty>";
+		final String expected = "null";
+		testTraslateRule(source, expected, parser -> parser.filterValue());
+	}
+
+	@Test
+	public void testCondition() {
+		final String source = "(('host created datetime'>=2019-01-03 00:00:00.000000 CET && 'host created datetime'<=2019-01-03 22:45:15.292000 CET) || ('host modified datetime'>=2019-01-03 00:00:00.000000 CET && 'host modified datetime'<=2019-01-03 22:45:15.292000 CET))";
+		final String expected = "( ( \"host created datetime\" >= \"2019-01-03 00:00:00.000000 CET\" && \"host created datetime\" <= \"2019-01-03 22:45:15.292000 CET\" ) || ( \"host modified datetime\" >= \"2019-01-03 00:00:00.000000 CET\" && \"host modified datetime\" <= \"2019-01-03 22:45:15.292000 CET\" ) )";
+		testTraslateRule(source, expected, parser -> parser.condition());
+	}
+
+	@Test
 	public void testParametersRequest() {
 		final String source = "Parameters = [1] {\n" + 
 				"    Parameter context ranking (68aa0456-b6eb-11e1-9b1c-06b747deb312) = <uuid> Global (5e325302-32d2-11e1-be6e-e748d6d66bf3)\n" + 
