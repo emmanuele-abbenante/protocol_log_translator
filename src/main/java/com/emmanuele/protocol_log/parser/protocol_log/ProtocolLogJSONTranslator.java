@@ -333,49 +333,14 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	@Override
 	public void exitVectorValue(ProtocolLogParser.VectorValueContext ctx) {
 		// Retrieving translation of child rule
-		final ParserRuleContext value = ctx.getRuleContext(ParserRuleContext.class, 0);
-		setJSON(ctx, getJSON(value));
-	}
-
-	@Override
-	public void exitUuidVector(ProtocolLogParser.UuidVectorContext ctx) {
-		final StringBuilder buf = new StringBuilder();
-		for (ProtocolLogParser.UuidValueContext child : ctx.uuidValue()) {
-			buf.append(getJSON(child)).append(",");
-		}
-		if (buf.length() > 0) {
-			buf.deleteCharAt(buf.length() - 1);
-		}
-		setJSON(ctx, addSquareBrackets(buf.toString()));
-	}
-
-	@Override
-	public void exitBooleanVector(ProtocolLogParser.BooleanVectorContext ctx) {
-		translateVector(ctx, ctx.integerVectorPair());
-	}
-
-	@Override
-	public void exitUint32Vector(ProtocolLogParser.Uint32VectorContext ctx) {
-		translateVector(ctx, ctx.integerVectorPair());
-	}
-
-	@Override
-	public void exitIntegerVectorPair(ProtocolLogParser.IntegerVectorPairContext ctx) {
-		final ParserRuleContext parent = ctx.getParent();
-		if (parent != null) {
-			if (parent instanceof ProtocolLogParser.BooleanVectorContext) {
-				setJSON(ctx, "1".equals(ctx.INTEGER(1).getText()) ? TRUE_VALUE : FALSE_VALUE);
-			} else if (parent instanceof ProtocolLogParser.Uint32VectorContext) {
-				setJSON(ctx, ctx.INTEGER(1).getText());
-			}
-		} else {
-			setJSON(ctx, ctx.INTEGER(1).getText());
-		}
-	}
-
-	@Override
-	public void exitAnyVector(ProtocolLogParser.AnyVectorContext ctx) {
+//		final ParserRuleContext value = ctx.getRuleContext(ParserRuleContext.class, 0);
 		translateVector(ctx, ctx.value());
+		String vectorValue = getJSON(ctx);
+		final String vectorType = ctx.getChild(0).getText();
+		if ("<vector of boolean>".equals(vectorType)) {
+			vectorValue = vectorValue.replaceAll("0", FALSE_VALUE).replaceAll("1", TRUE_VALUE);
+		}
+		setJSON(ctx, vectorValue);
 	}
 
 	private <T extends ParserRuleContext> void translateVector(final ParserRuleContext ctx, final List<T> values) {
@@ -387,11 +352,6 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 			buf.deleteCharAt(buf.length() - 1);
 		}
 		setJSON(ctx, addSquareBrackets(buf.toString()));
-	}
-
-	@Override
-	public void exitMessageVector(ProtocolLogParser.MessageVectorContext ctx) {
-		translateVector(ctx, ctx.message());
 	}
 
 	@Override

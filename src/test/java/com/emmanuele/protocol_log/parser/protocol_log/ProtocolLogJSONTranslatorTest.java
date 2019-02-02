@@ -426,53 +426,39 @@ public class ProtocolLogJSONTranslatorTest {
 	}
 
 	@Test
-	public void testVectorValue() {
+	public void testVectorValue_Uuid() {
+		final String source = "<vector of uuid> [3]\n" + "    0 = Dividends (8716833d-2951-4815-88bb-3c87e3637eb8)\n"
+				+ "    1 = Dividend time fallback (0ec616b3-b779-11e4-bb45-245e0d1c06b7)\n"
+				+ "    2 = Dividend tax rule (39c3f1b1-900e-11e8-9e47-f1bbe9ebb3a6)";
+		final String expected = "[\"Dividends (8716833d-2951-4815-88bb-3c87e3637eb8)\",\"Dividend time fallback (0ec616b3-b779-11e4-bb45-245e0d1c06b7)\",\"Dividend tax rule (39c3f1b1-900e-11e8-9e47-f1bbe9ebb3a6)\"]";
+		testTraslateRule(source, expected, parser -> parser.vectorValue());
+	}
+
+	@Test
+	public void testVectorValue_Boolean() {
 		final String source = "<vector of boolean> [2]\n" + "    0 = 1\n" + "    1 = 0";
 		final String expected = "[true,false]";
 		testTraslateRule(source, expected, parser -> parser.vectorValue());
 	}
 
 	@Test
-	public void testUuidVector() {
-		final String source = "<vector of uuid> [3]\n" + "    0 = Dividends (8716833d-2951-4815-88bb-3c87e3637eb8)\n"
-				+ "    1 = Dividend time fallback (0ec616b3-b779-11e4-bb45-245e0d1c06b7)\n"
-				+ "    2 = Dividend tax rule (39c3f1b1-900e-11e8-9e47-f1bbe9ebb3a6)";
-		final String expected = "[\"Dividends (8716833d-2951-4815-88bb-3c87e3637eb8)\",\"Dividend time fallback (0ec616b3-b779-11e4-bb45-245e0d1c06b7)\",\"Dividend tax rule (39c3f1b1-900e-11e8-9e47-f1bbe9ebb3a6)\"]";
-		testTraslateRule(source, expected, parser -> parser.uuidVector());
-	}
-
-	@Test
-	public void testBooleanVector() {
-		final String source = "<vector of boolean> [2]\n" + "    0 = 1\n" + "    1 = 0";
-		final String expected = "[true,false]";
-		testTraslateRule(source, expected, parser -> parser.booleanVector());
-	}
-
-	@Test
-	public void testIntegerVectorPair() {
-		final String source = "1 = 0";
-		final String expected = "0";
-		testTraslateRule(source, expected, parser -> parser.integerVectorPair());
-	}
-
-	@Test
-	public void testUint32Vector() {
+	public void testVectorValue_Uint32() {
 		final String source = "<vector of uint32> [4]\n" + "    0 = 0\n" + "    1 = 0\n" + "    2 = 0\n" + "    3 = 0";
 		final String expected = "[0,0,0,0]";
-		testTraslateRule(source, expected, parser -> parser.uint32Vector());
+		testTraslateRule(source, expected, parser -> parser.vectorValue());
 	}
 
 	@Test
-	public void testAnyVector() {
+	public void testVectorValue_Any() {
 		final String source = "<vector of any> [4]\n" + "    0 = <integer> 1\n"
 				+ "    1 = <datetime> 2019-01-03 22:45:16.841148 CET\n" + "    2 = <uinteger> 481\n"
 				+ "    3 = <string> \"Extraction at time 22:45:15 completed\"";
 		final String expected = "[1,\"2019-01-03 22:45:16.841148 CET\",481,\"Extraction at time 22:45:15 completed\"]";
-		testTraslateRule(source, expected, parser -> parser.anyVector());
+		testTraslateRule(source, expected, parser -> parser.vectorValue());
 	}
 
 	@Test
-	public void testMessageVector() {
+	public void testVectorValue_Message() {
 		final String source = "<vector of message> [3]\n" + 
 				"  0 = <message> (201) GridViewFilterElement, <size> [74]\n" + 
 				"	  {\n" + 
@@ -511,7 +497,7 @@ public class ProtocolLogJSONTranslatorTest {
 				"		}\n" + 
 				"	  }";
 		final String expected = "[{\"messageType\":\"GridViewFilterElement\",\"grid view filter condition\":{\"messageType\":\"GridViewFilterCondition\",\"grid view field\":{\"messageType\":\"GridViewField\",\"grid view field value\":1,\"grid view property identifier\":\"State (ebd07201-bd28-4079-b526-e99b9287ca81)\"},\"grid view filter condition type\":\"Equal\"}},{\"messageType\":\"GridViewFilterElement\",\"grid view filter condition\":{\"messageType\":\"GridViewFilterCondition\",\"grid view field\":{\"messageType\":\"GridViewField\",\"grid view field value\":1,\"grid view property identifier\":\"Transaction state (32cba9f8-87dd-423d-94f4-f6080c457234)\"},\"grid view filter condition type\":\"Equal\"}},{\"messageType\":\"GridViewFilterElement\",\"grid view filter condition\":{\"messageType\":\"GridViewFilterCondition\",\"grid view field\":{\"messageType\":\"GridViewField\",\"grid view field value\":2,\"grid view property identifier\":\"Transaction operation (5fede20f-a105-406a-8fca-79b06afaacbd)\"},\"grid view filter condition type\":\"Equal\"}}]";
-		testTraslateRule(source, expected, parser -> parser.messageVector());
+		testTraslateRule(source, expected, parser -> parser.vectorValue());
 	}
 
 	@Test

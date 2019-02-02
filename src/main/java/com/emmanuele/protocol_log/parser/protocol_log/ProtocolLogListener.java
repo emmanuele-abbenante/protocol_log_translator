@@ -378,66 +378,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitVectorValue(ProtocolLogParser.VectorValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#uuidVector}.
-	 * @param ctx the parse tree
-	 */
-	void enterUuidVector(ProtocolLogParser.UuidVectorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#uuidVector}.
-	 * @param ctx the parse tree
-	 */
-	void exitUuidVector(ProtocolLogParser.UuidVectorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#booleanVector}.
-	 * @param ctx the parse tree
-	 */
-	void enterBooleanVector(ProtocolLogParser.BooleanVectorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#booleanVector}.
-	 * @param ctx the parse tree
-	 */
-	void exitBooleanVector(ProtocolLogParser.BooleanVectorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#integerVectorPair}.
-	 * @param ctx the parse tree
-	 */
-	void enterIntegerVectorPair(ProtocolLogParser.IntegerVectorPairContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#integerVectorPair}.
-	 * @param ctx the parse tree
-	 */
-	void exitIntegerVectorPair(ProtocolLogParser.IntegerVectorPairContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#anyVector}.
-	 * @param ctx the parse tree
-	 */
-	void enterAnyVector(ProtocolLogParser.AnyVectorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#anyVector}.
-	 * @param ctx the parse tree
-	 */
-	void exitAnyVector(ProtocolLogParser.AnyVectorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#uint32Vector}.
-	 * @param ctx the parse tree
-	 */
-	void enterUint32Vector(ProtocolLogParser.Uint32VectorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#uint32Vector}.
-	 * @param ctx the parse tree
-	 */
-	void exitUint32Vector(ProtocolLogParser.Uint32VectorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#messageVector}.
-	 * @param ctx the parse tree
-	 */
-	void enterMessageVector(ProtocolLogParser.MessageVectorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#messageVector}.
-	 * @param ctx the parse tree
-	 */
-	void exitMessageVector(ProtocolLogParser.MessageVectorContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#tableValue}.
 	 * @param ctx the parse tree
 	 */

@@ -311,67 +311,25 @@ errorValue
 	'<error double>' QUOTED_STRING
 ;
 
-//TODO check if vector rules can be unified
-
 vectorValue
 :
-	uuidVector
-	| booleanVector
-	| anyVector
-	| uint32Vector
-	| messageVector
-;
-
-uuidVector
-:
-	'<vector of uuid>'
+	(
+		'<vector of uuid>'
+		| '<vector of boolean>'
+		| '<vector of any>'
+		| '<vector of uint32>'
+		| '<vector of message>'
+	)
 	(
 		'[' INTEGER ']'
 		(
 			NL INTEGER '='
 			(
-				uuidValue
+				value
 			)
 		)+
 		| EMPTY_VALUE
 	)
-;
-
-booleanVector
-:
-	'<vector of boolean>' '[' INTEGER ']'
-	(
-		NL integerVectorPair
-	)*
-;
-
-integerVectorPair
-:
-	INTEGER '=' INTEGER
-;
-
-anyVector
-:
-	'<vector of any>' '[' INTEGER ']'
-	(
-		NL INTEGER '=' value
-	)*
-;
-
-uint32Vector
-:
-	'<vector of uint32>' '[' INTEGER ']'
-	(
-		NL integerVectorPair
-	)*
-;
-
-messageVector
-:
-	'<vector of message>' '[' INTEGER ']'
-	(
-		NL INTEGER '=' message
-	)*
 ;
 
 tableValue
