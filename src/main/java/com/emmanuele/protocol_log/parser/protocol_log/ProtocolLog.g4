@@ -152,7 +152,6 @@ value
 	| streamMessageIdentifiersValue
 	| requestTypeValue
 	| vectorValue
-	| tableValue
 	| message
 	| anyValue
 	| parametersValue
@@ -319,25 +318,19 @@ vectorValue
 		| '<vector of any>'
 		| '<vector of uint32>'
 		| '<vector of message>'
+		| '<table values>'
 	)
 	(
 		'[' INTEGER ']'
 		(
-			NL INTEGER '='
+			NL
 			(
-				value
+				INTEGER '=' value
+				| row
 			)
 		)+
 		| EMPTY_VALUE
 	)
-;
-
-tableValue
-:
-	'<table values>' '[' INTEGER ']'
-	(
-		NL row
-	)*
 ;
 
 row

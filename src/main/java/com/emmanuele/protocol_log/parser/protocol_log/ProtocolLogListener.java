@@ -378,16 +378,6 @@ public interface ProtocolLogListener extends ParseTreeListener {
 	 */
 	void exitVectorValue(ProtocolLogParser.VectorValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ProtocolLogParser#tableValue}.
-	 * @param ctx the parse tree
-	 */
-	void enterTableValue(ProtocolLogParser.TableValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ProtocolLogParser#tableValue}.
-	 * @param ctx the parse tree
-	 */
-	void exitTableValue(ProtocolLogParser.TableValueContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ProtocolLogParser#row}.
 	 * @param ctx the parse tree
 	 */

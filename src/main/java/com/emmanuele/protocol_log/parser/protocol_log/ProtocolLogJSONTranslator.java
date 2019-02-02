@@ -334,7 +334,11 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 	public void exitVectorValue(ProtocolLogParser.VectorValueContext ctx) {
 		// Retrieving translation of child rule
 //		final ParserRuleContext value = ctx.getRuleContext(ParserRuleContext.class, 0);
-		translateVector(ctx, ctx.value());
+		List<? extends ParserRuleContext> values = ctx.value();
+		if (values == null || values.isEmpty()) {
+			values = ctx.row();
+		}
+		translateVector(ctx, values);
 		String vectorValue = getJSON(ctx);
 		final String vectorType = ctx.getChild(0).getText();
 		if ("<vector of boolean>".equals(vectorType)) {
@@ -482,11 +486,6 @@ public class ProtocolLogJSONTranslator extends ProtocolLogBaseListener implement
 		}
 		buf.append(buildPair(addQuotes("mic"), addQuotes(ctx.STRING().getText())));
 		setJSON(ctx, addBraces(buf.toString()));
-	}
-
-	@Override
-	public void exitTableValue(ProtocolLogParser.TableValueContext ctx) {
-		translateVector(ctx, ctx.row());
 	}
 
 	@Override
